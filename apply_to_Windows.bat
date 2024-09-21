@@ -1,3 +1,5 @@
+@echo off
+
 rem  This attempts to copy the rainbow scipt from here to 
 rem  where it will be applied to the user's Vim settings.
 rem  
