@@ -10,7 +10,7 @@ It is overlaid on whatever other syntax highlighting you use and will leave othe
 
 This script is based/built upon John Gilmore's original "Rainbow Parenthesis" *[sic]* (aka "RainbowParenthsis.vim" *[sic]*) script, which can be found on [the corresponding Vim.org page](https://www.vim.org/scripts/script.php?script_id=1230).
 
-This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) dependencies. It doesn't muck around with anything up on your system. It is strictly a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.
+This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) dependencies. It doesn't muck around with anything on your system. It is strictly a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.
 
 The core guiding principle of this script is to make it as easy to use as possible *without overengineering it* and *without requiring any third party dependencies*. Imperfect but reliable pragmatism is better than polluting the user's system. Reliability and ease matter more than ideology.
 
@@ -68,7 +68,6 @@ If you use `:syntax off` at any point then the script may stop working and you m
   
 - The color mode functions (`RbCustomColors` and `RbNamedColors`) break
   things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set colors in advance.
-
 
 ## Miscellaneous Utilities
 
