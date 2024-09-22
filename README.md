@@ -8,7 +8,7 @@ It is especially useful for highly nested programming languages and/or those tha
 
 It is overlaid on whatever other syntax highlighting you use and will leave other things untouched.
 
-This script is based/built upon John Gilmore's original "Rainbow Parenthesis" *[sic]* (aka "RainbowParenthsis.vim" *[sic]*) script, which can be found on [the corresponding Vim.org page](https://www.vim.org/scripts/script.php?script_id=1230).
+This script is based/built upon John Gilmore's original "Rainbow Parenthesis" *[sic]* (aka "RainbowParenthsis.vim" *[sic]*) script, which can be found on [John Gilmore's Vim.org page for it](https://www.vim.org/scripts/script.php?script_id=1230).
 
 This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) dependencies. It doesn't muck around with anything on your system. It is strictly a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.
 
