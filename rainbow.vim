@@ -98,8 +98,8 @@
 
 
 
-" KNOWN BUGS:
-" -----------
+" KNOWN BUGS AND LIMITATIONS:
+" ---------------------------
 " 
 " - At nesting levels above 16, the syntax highlighting of closing delimiters 
 "   may become mismatched! Such deep nesting is hard to understand regardless though.
@@ -446,13 +446,16 @@ autocmd BufNewFile,BufRead * source <sfile>
 " WARNING: The below will have NO USEFUL EFFECT if the above line isn't commented out.
 
 " For Common Lisp:
+" ----------------
 "autocmd BufNewFile,BufRead *.lisp source <sfile>
 "autocmd BufNewFile,BufRead *.cl source <sfile>
 
 " For Racket (the most popular Scheme-like language):
+" ---------------------------------------------------
 "autocmd BufNewFile,BufRead *.rkt source <sfile>
 
-" For various 'Scheme language standard' adhering languages or uses:
+" For various 'Scheme language standard adhering' languages or DSLs:
+" ------------------------------------------------------------------
 "autocmd BufNewFile,BufRead *.scm source <sfile>
 "autocmd BufNewFile,BufRead *.ss source <sfile>
 "autocmd BufNewFile,BufRead *.sc source <sfile>
@@ -464,17 +467,20 @@ autocmd BufNewFile,BufRead * source <sfile>
 "autocmd BufNewFile,BufRead *.scrbl source <sfile>
 
 " Scheme is not well standardized and has no standard file extension.
+" Indeed, the Scheme 'language standard' no longer has much influence.
 
 " For Clojure:
+" ------------
 "autocmd BufNewFile,BufRead *.clj source <sfile>
 "autocmd BufNewFile,BufRead *.cljs source <sfile>
 "autocmd BufNewFile,BufRead *.cljc source <sfile>
 
 " `.clj` is for Clojure.
 " `.cljs` is for ClojureScript.
-" `.cljc` is for code that could be Clojure or ClojureScript.
+" `.cljc` is for code that could be either Clojure or ClojureScript.
 
 " For Janet:
+" ----------
 "autocmd BufNewFile,BufRead *.janet so <sfile>
 
 
@@ -510,10 +516,10 @@ autocmd BufNewFile,BufRead * source <sfile>
 " 
 " You'll get access to closer binding to C and C's libraries, but may also *need* to do so.
 " You'll produce far more computationally efficient programs that way though (~on par with C).
-" 
+
 " Like many Lisp/Scheme family languages though, some of these languages don't have good
 " cross-platform support for Windows, though nearly all support Linux/BSD/Unix well.
-
+"
 " Racket, Steel Bank Common Lisp, and Janet all of have very good Windows support.
 " Other languages mentioned above may also, but I haven't tested them as much or at all.
 
@@ -524,7 +530,7 @@ autocmd BufNewFile,BufRead * source <sfile>
 
 
 " More file association implementation info:
-" ----------------------------------------------
+" ------------------------------------------
 "  
 " `<sfile>` is the current script file (`rainbow.vim` in this case).
 " 

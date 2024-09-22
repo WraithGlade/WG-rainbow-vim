@@ -18,7 +18,7 @@ The core guiding principle of this script is to make it as easy to use as possib
 
 I have included very extensive documentation throughout the entire Vimscript file and you can learn everything you need to know from reading the `rainbow.vim` file. That way, the necessary info is all self-contained, even if you lose this `README.md` document. It doesn't contain the exact same info as this `README.md`, but it is similar. Either way, the script is extremely easy to use and modify.
 
-To use this script ("plugin"), all you have to do is place the script into your `%userprofile%/vimfiles/plugins` (on Windows) or `~/.vim/plugins` (on Linux/BSD/Unix) folder and it will load itself automatically whenever you use Vim. Running `apply_to_Windows.bat` or `apply_to_Linux_etc.sh` will try to do this automatically for you (like an installer).
+To use this script ("plugin"), all you have to do is place the script into your `%userprofile%/vimfiles/plugins` (on Windows) or `~/.vim/plugins` (on Linux/BSD/Unix) folder and it will load itself automatically whenever you use Vim. Running `Windows_install.bat` or `Linux_etc_install.sh` will try to do this automatically for you (like an installer).
 
 (Alternatively, like most scripts, you can load it manually at will by using `:so path/to/rainbow.vim` and placing a copy of `rainbow.vim` wherever you find it convenient to write the path to.)
 
@@ -76,8 +76,8 @@ The Git repo also includes very small shell scripts for more easily/quickly sync
 
 You don't need to concern yourself with that though if you intend to just drag and drop `rainbow.vim` to your Vim `plugin` folder. All these extra scripts do is perform the copying for you automatically:
 
-- `apply_to_Windows.bat`: copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugins`
-- `apply_to_Linux_etc.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugins`
+- `Windows_install.bat`: copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugins`
+- `Linux_etc_install.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugins`
 
 On Windows, double-clicking a Batch/CMD (`.bat`) file will run it automatically, like an installer or EXE.
 
