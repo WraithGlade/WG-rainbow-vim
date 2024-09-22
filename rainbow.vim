@@ -16,23 +16,28 @@
 " History and provenance
 " ----------------------
 " 
-" This modified script was built upon the 'RainbowParenth[eses].vim' script 
-" created and released by John Gilmore on 2005-03-12.
+" This modified script was built upon the 'RainbowParenthsis.vim' [sic] script 
+" created and released by John Gilmore into the public domain on 2005-03-12.
 " 
 " I (internet alias: WraithGlade, website: WraithGlade.com) created this
-" modified form (starting on 2024-09-20) out of frustration with luochen1990's
-" more recent but more bloated and overengineered rainbow highlighting script.
+" modified form (starting on 2024-09-20) out of frustration with a more prevalent and
+" more 'modern' but more bloated and overengineered rainbow highlighting script.
+" 
+" So, I went back and found one of the oldest (most original) rainbow scripts and
+" then revitalized, refurbished, and refined it to be usable in practice again.
 " 
 " This script also doesn't make any use of any 3rd party plugin systems, etc.
-" It is designed to have few moving parts and to be easy to understand.
+" It is designed to have few moving parts, few dependencies, and to be easy to understand.
 " 
-" Gilmore's original can be found at https://www.vim.org/scripts/script.php?script_id=1230
+" Gilmore's original can be found at:
 " 
-" I've modified Gilmore's script to be more intuitive to use and modify
+"   https://www.vim.org/scripts/script.php?script_id=1230
+" 
+" I've modified Gilmore's script to be cleaner and more intuitive to use and modify
 " and to have better default colors and such. I've added a lot of documentation too.
 " 
-" Thus, this script provides an alternative for anyone having trouble with
-" some of the other rainbow highlighters out there or who want a simpler system.
+" Thus, this script provides an alternative for anyone having issues with some 
+" of the other rainbow highlighters out there or who just want a simpler system.
 "
 "
 " How to use:
@@ -43,24 +48,22 @@
 " Vim starts, regardless of file type or language. If it doesn't, then perhaps try adding
 " `filetype plugin on` somewhere to your `.vimrc` file (your user pref/config file).
 " 
-" Vim's `:source <filename>` command can alternatively be used to load the script manually.
+" Vim's `:source <path/to/rainbow.vim>` command can alternatively be used to load the script manually.
 " 
-" (PS: `:so` can be used as shorthand for `:source`, which is more covenient.)
+" (PS: `:so` can be used as shorthand for `:source`, which is more convenient in practice.)
 " 
-" I have organized the script into functions to enable simpler usage and customization.
+" Anyway, I have organized the script into functions to enable simpler usage and customization.
 " 
-" You can also call those functions manually when using Vim via `:call FuncName()`.
-" I have also provided 'command' versions of the safe-to-reuse functions for shorthand,
+" You can call almost all of those functions manually when using Vim via `:call FuncName()`.
+" I have provided 'command' versions of any/all safe-to-reuse functions for shorthand,
 " which enables you to write just `:FuncName` in Vim instead of `:call FuncName()`.
-" 
-" (PS: I have occasionally encountered things breaking when calling the functions manually.)
 " 
 " (PS: Global function names must always begin with a capital letter in Vimscript.)
 "
-" The plugin can be restricted to only run for specific file types by
+" The this script can be restricted to only run for specific file types by
 " modifying the `autocmd` lines at the very end of this script.
 " 
-" Indeed, many things in this script are intended to be easily modifiable.
+" Indeed, many things in this script are intended to be easily modifiable. Do so.
 " I have added many comments to clarify what things are and alert you of pitfalls.
 " 
 " 
@@ -77,32 +80,39 @@
 " 
 " Likewise, choose either `RbCustomColors()` or `RbNamedColors()`, whichever you prefer,
 " and then ensure it is the one called in BASIC SETUP section below. Only one applies.
-" `RbCustomColors()` is more flexible though, is the default, and is what I recommend.
+" `RbCustomColors()` is more flexible though and is the default.
 " 
 " You can also call any of this script's functions at runtime by writing just `:FuncName` 
 " during normal Vim use. There are also other shorthand versions and alt names available 
 " (search for `command -narg` declarations to see what shorthand commands are already included).
+" 
+" The `:Rb` command is especially useful, since it toggles the rainbow highlighter on and off.
+" Many other highly useful commands were included as well though. Take a look! Make your own too!
 " 
 " You can also modify the individual color assignments within `RbLight` and/or `RbDark`
 " to suit your prefrences, or create your own named color theme functions and call them.
 
 
 
+
 " KNOWN BUGS:
 " -----------
 " 
-" - At nesting levels above 16 the syntax highlighting of closing delimiters 
+" - At nesting levels above 16, the syntax highlighting of closing delimiters 
 "   may become mismatched! Such deep nesting is hard to understand regardless though.
-"   
-"   (Vim's console color implementation appears to have some baked-in 
-"   assumptions about 16 console colors max existing too though, partially.)
+"   A core principle of this script (compared to other rainbow highlighters) is not to 
+"   overengineer it though, so this may never be fixed. 
+"  
+"   (Vim's console color implementation also appears to have some baked-in 
+"   assumptions about 16 console colors max existing too.)
 " 
 " - If `:syntax off` is used and then followed by `:syntax on` later,
-"   then the rainbow highlighter may not turn back on. So, as a workaround,
-"   use the provided rainbow commands such as `:RbToggle`, `:RbOff`, and `:RbOn` instead.
+"   then the rainbow highlighter may not turn back on. So, as a workaround, use 
+"   the provided rainbow commands such as `:RbToggle`, `:RbOff`, and `:RbOn` instead.
 "   
-" - The color theme functions (`RbCustomColors` and `RbNamedColors`) break
-"   things sometimes when called during normal Vim use outside of this script.
+" - The color mode functions (`RbCustomColors` and `RbNamedColors`) break
+"   things sometimes when called during normal Vim use *outside of this script*.
+"   You'll need to set colors in advance. 
 
 
 
@@ -121,7 +131,7 @@ function RbCustomColors()
   " human eyesight. I've evenly divided such colors 8x by hue, conserving luminosity.
 endfunction
 " Calling this function outside this script is known to break things sometimes.
-" Thus, no shorthand `command` version is provided, to discourage errors.
+" Thus, no shorthand `command` version is provided for it, to discourage errors.
 
 function RbNamedColors()
   set termguicolors&
@@ -130,7 +140,7 @@ function RbNamedColors()
   " Only one set (`ctermfg` or `guifg`) applies at a given time!
 endfunction
 " Calling this function outside this script is known to break things sometimes.
-" Thus, no shorthand `command` version is provided, to discourage errors.
+" Thus, no shorthand `command` version is provided for it, to discourage errors.
 
 
 
@@ -143,6 +153,7 @@ endfunction
 " The numbering of levels is backwards relative to one's intuition.
 " 
 " Thus, a nested pair 16 levels deep is actually set by 'level1c', etc.
+" 
 " The highest numbered levels are the *outermost* delimiter pairs.
 
 " For choosing custom colors:
@@ -151,10 +162,9 @@ endfunction
 " `guifg` uses standard hexidecimal codes for red, green, and blue: `#RRGGBB`.
 " Thus `#ff0000` is full red, `#00ff00` is full green, `#808080` is mid grey, etc.
 " 
-" 
 " The higher the contrast between foreground and background and between successive
 " color hues, saturations, and lightnesses, the easier it'll be to
-" distinguish deeply nested adjacent delimiters' matching pairs.
+" distinguish deeply nested nearby delimiters' matching pairs.
 
 function RbDarkTheme()
   " Intended for dark backgrounds, thus assigns *light* foreground (fg) colors:
@@ -283,6 +293,7 @@ endfunction
 command -nargs=0 RbSquiggle :call RbSquiggle()
 
 
+
 function RbOn()
   call RbParen()
   call RbSquare()
@@ -387,18 +398,22 @@ command -nargs=0 RbToggle :call Rb()
 command -nargs=0 Rainbow :call Rb()
 command -nargs=0 RainbowToggle :call Rb()
 " Command names (like functions) must always start with capital letters, unfortunately.
-" Thus, we can't shorten the rainbow toggle even more to `:rb`.
+" Thus, we can't shorten the rainbow toggle even more to `:rb`. Oh well though.
 
 
 
-" ======================================================================================
+" =====================================================================================
 "   BASIC SETUP
-" ======================================================================================
-" 
-" Below is where everything is actually put into effect:
+" =====================================================================================
 
-" These are the default settings for the script essentially. 
-" Change which functions are called to suit your preferences:
+" Below is where everything is actually put into effect.
+"
+" This is the default setup for the script essentially.
+" 
+" If desired, modify the colors inside `RbDarkTheme` and/or `RbLightTheme`
+" or alternatively create your own separate named color theme function(s).
+" 
+" Then, change which functions are called below to suit your preferences:
 
 call RbCustomColors()
 call RbDarkTheme()
@@ -413,43 +428,82 @@ call RbOn()
 " Look for text of the form `*.file_extension` below.
 " 
 " Uncomment the lines for the file associations that you want to apply this script to.
-" You may uncomment multiple this way. They apply separately.
+" You may uncomment multiple this way. They apply separately, to all matching files.
 " 
-" Using just `*` causes the script to run for all file types.
+" Using just `*` causes the script to run for ALL file types and is the default.
 " 
 " `BufNewFile` means apply the script to new (unsaved) files.
 " `BufRead` means apply the script to existing (saved) files.
 
 
-" For ALL files types (including unspecified and/or unknown ones):
+" To apply rainbow to ALL files types (including unspecified and/or unknown ones):
+
 autocmd BufNewFile,BufRead * source <sfile>
-" The below will have NO USEFUL EFFECT if the above line isn't commented out.
+
+" WARNING: The below will have NO USEFUL EFFECT if the above line isn't commented out.
 
 " For Common Lisp:
-"autocmd BufNewFile,BufRead *.lisp so <sfile>
-"autocmd BufNewFile,BufRead *.cl so <sfile>
+"autocmd BufNewFile,BufRead *.lisp source <sfile>
+"autocmd BufNewFile,BufRead *.cl source <sfile>
 
 " For Racket (the most popular Scheme-like language):
-"autocmd BufNewFile,BufRead *.rkt so <sfile>
+"autocmd BufNewFile,BufRead *.rkt source <sfile>
 
 " For various 'Scheme language standard' adhering languages or uses:
-"autocmd BufNewFile,BufRead *.scm so <sfile>
-"autocmd BufNewFile,BufRead *.ss so <sfile>
-"autocmd BufNewFile,BufRead *.sc so <sfile>
-"autocmd BufNewFile,BufRead *.sps so <sfile>
-"autocmd BufNewFile,BufRead *.sls so <sfile>
-"autocmd BufNewFile,BufRead *.sld so <sfile>
-"autocmd BufNewFile,BufRead *.scr so <sfile>
-"autocmd BufNewFile,BufRead *.sps7 so <sfile>
-"autocmd BufNewFile,BufRead *.scrbl so <sfile>
+"autocmd BufNewFile,BufRead *.scm source <sfile>
+"autocmd BufNewFile,BufRead *.ss source <sfile>
+"autocmd BufNewFile,BufRead *.sc source <sfile>
+"autocmd BufNewFile,BufRead *.sps source <sfile>
+"autocmd BufNewFile,BufRead *.sls source <sfile>
+"autocmd BufNewFile,BufRead *.sld source <sfile>
+"autocmd BufNewFile,BufRead *.scr source <sfile>
+"autocmd BufNewFile,BufRead *.sps7 source <sfile>
+"autocmd BufNewFile,BufRead *.scrbl source <sfile>
+
+" Scheme is not well standardized and has no standard file extension.
 
 " For Clojure:
-"autocmd BufNewFile,BufRead *.clj so <sfile>
-"autocmd BufNewFile,BufRead *.cljs so <sfile>
-"autocmd BufNewFile,BufRead *.cljc so <sfile>
+"autocmd BufNewFile,BufRead *.clj source <sfile>
+"autocmd BufNewFile,BufRead *.cljs source <sfile>
+"autocmd BufNewFile,BufRead *.cljc source <sfile>
+
+" `.clj` is for Clojure.
+" `.cljs` is for ClojureScript.
+" `.cljc` is for code that could be Clojure or ClojureScript.
 
 " For Janet:
 "autocmd BufNewFile,BufRead *.janet so <sfile>
+
+
+
+" If you're having trouble deciding what language to use:
+" -------------------------------------------------------
+
+" Janet is a Lisp/Scheme family languages that cleans up and removes many
+" oddities and archaisms from Lisp/Scheme (e.g. it has no `car` or `cdr`).
+" However, it seems to be interpreted and intended for scripting and so
+" it may suffer from poor performance that is typical of e.g. Python or non-JIT Lua.
+
+" Common Lisp seems to typically be the most performant *traditional* Lisp/Scheme language.
+" One benchmark I looked at seemed to place CL's performance at ~3x to 6x slower than C (for SBCL).
+" 
+" Steel Bank Common Lisp and Embeddable Common Lisp may be the most useful CL implementations.
+
+" Racket and/or Janet are perhaps the 'cleanest' Lisp/Scheme languages overall.
+" Racket has the nicest IDE, the easiest EXE generation, and one of the best macro debuggers.
+" Janet 'breaks with past traditions' to improve idioms of use more than any of the others.
+
+" Common Lisp and Racket probably have the largest libraries and largest communities.
+
+" Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist,
+" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), and Carp. They are smaller though.
+" 
+" Such languages require more low level coding, but would likely easily greatly outperform 
+" conventional Lisp/Scheme languages (including Common Lisp) and waste much less CPU time/energy.
+" 
+" You'll get access to closer binding to C and C's libraries, but may also *need* to do so.
+" You'll produce far more computationally efficient programs that way though (~on par with C).
+
 
 
 " More file association implementation info:
@@ -457,12 +511,12 @@ autocmd BufNewFile,BufRead * source <sfile>
 "  
 " `<sfile>` is the current script file (`rainbow.vim` in this case).
 " 
-" `so` loads and applies whatever `.vim` script is passed to it.
+" `source <path/to/file.vim>` loads and applies whatever `.vim` script is passed to it.
+" `so` can be used as shorthand instead if desired.
 "
 " See https://vimdoc.sourceforge.net/htmldoc/autocmd.html
 " 
-" When I tried to put the above `autocmd` lines into a separate
-" function, it caused loading errors whenever I loaded
+" When I tried to put the above `autocmd` lines into separate
+" function(s), it caused loading errors whenever I loaded
 " `rainbow.vim` itself, and so I decided against that.
-
 
