@@ -1,4 +1,4 @@
-# WraithGlade's Rainbow Highlighter for Vim
+# WraithGlade's Rainbow Delimiter Highlighter for Vim
 
 ## Purpose and History
 
@@ -18,7 +18,7 @@ The core guiding principle of this script is to make it as easy to use as possib
 
 I have included very extensive documentation throughout the entire Vimscript file and you can learn everything you need to know from reading the `rainbow.vim` file. That way, the necessary info is all self-contained, even if you lose this `README.md` document. It doesn't contain the exact same info as this `README.md`, but it is similar. Either way, the script is extremely easy to use and modify.
 
-To use this script ("plugin"), all you have to do is place the script into your `%userprofile%/vimfiles/plugins` (on Windows) or `~/.vim/plugins` (on Linux/BSD/Unix) folder and it will load itself automatically whenever you use Vim. 
+To use this script ("plugin"), all you have to do is place the script into your `%userprofile%/vimfiles/plugins` (on Windows) or `~/.vim/plugins` (on Linux/BSD/Unix) folder and it will load itself automatically whenever you use Vim. Running `apply_to_Windows.bat` or `apply_to_Linux_etc.sh` will try to do this automatically for you (like an installer).
 
 (Alternatively, like most scripts, you can load it manually at will by using `:so path/to/rainbow.vim` and placing a copy of `rainbow.vim` wherever you find it convenient to write the path to.)
 
@@ -72,12 +72,14 @@ If you use `:syntax off` at any point then the script may stop working and you m
 
 ## Miscellaneous Utilities
 
-The Git repo also includes very small shell scripts for more easily/quickly synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (Otherwise, you might be tempted to pollute Vim's config directories by placing the full Git repo there.)
+The Git repo also includes very small shell scripts for more easily/quickly synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (Otherwise, one might be tempted to bloat Vim's config directories by placing the full Git repo there.)
 
 You don't need to concern yourself with that though if you intend to just drag and drop `rainbow.vim` to your Vim `plugin` folder. All these extra scripts do is perform the copying for you automatically:
 
 - `apply_to_Windows.bat`: copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugins`
 - `apply_to_Linux_etc.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugins`
+
+On Windows, double-clicking a Batch/CMD (`.bat`) file will run it automatically, like an installer or EXE.
 
 ## Extras (Bonus)
 

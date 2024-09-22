@@ -1,3 +1,6 @@
+" WraithGlade's Rainbow Delimiter Highlighter for Vim
+" ===================================================
+" 
 " What is this script?
 " --------------------
 " 
@@ -481,13 +484,14 @@ autocmd BufNewFile,BufRead * source <sfile>
 
 " Janet is a Lisp/Scheme family languages that cleans up and removes many
 " oddities and archaisms from Lisp/Scheme (e.g. it has no `car` or `cdr`).
-" However, it seems to be interpreted and intended for scripting and so
-" it may suffer from poor performance that is typical of e.g. Python or non-JIT Lua.
+" However, it seems to be interpreted and intended for scripting/embedding and so
+" it may suffer from poor performance on par with e.g. Python or non-JIT Lua (etc).
 
 " Common Lisp seems to typically be the most performant *traditional* Lisp/Scheme language.
 " One benchmark I looked at seemed to place CL's performance at ~3x to 6x slower than C (for SBCL).
+" It used proper optimization declarations though. It was not 100% idiomatic Common Lisp code.
 " 
-" Steel Bank Common Lisp and Embeddable Common Lisp may be the most useful CL implementations.
+" Steel Bank Common Lisp (SBCL) and Embeddable Common Lisp may be the most useful CL implementations.
 
 " Racket and/or Janet are perhaps the 'cleanest' Lisp/Scheme languages overall.
 " Racket has the nicest IDE, the easiest EXE generation, and one of the best macro debuggers.
@@ -495,14 +499,27 @@ autocmd BufNewFile,BufRead * source <sfile>
 
 " Common Lisp and Racket probably have the largest libraries and largest communities.
 
-" Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist,
-" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), and Carp. They are smaller though.
+" Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist(!),
+" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), Lcc, and Carp.
 " 
-" Such languages require more low level coding, but would likely easily greatly outperform 
+" These languages have smaller communities than Common Lisp and Racket and
+" some appear less updated: either inactive (incomplete) or stable/mature (complete).
+" 
+" Such languages may require more low-level coding, but would likely easily greatly outperform 
 " conventional Lisp/Scheme languages (including Common Lisp) and waste much less CPU time/energy.
 " 
 " You'll get access to closer binding to C and C's libraries, but may also *need* to do so.
 " You'll produce far more computationally efficient programs that way though (~on par with C).
+" 
+" Like many Lisp/Scheme family languages though, some of these languages don't have good
+" cross-platform support for Windows, though nearly all support Linux/BSD/Unix well.
+
+" Racket, Steel Bank Common Lisp, and Janet all of have very good Windows support.
+" Other languages mentioned above may also, but I haven't tested them as much or at all.
+
+" See the following GitHub repo for a huge list of Lisp/Scheme languages and implementations:
+" 
+"   https://github.com/dundalek/awesome-lisp-languages 
 
 
 
