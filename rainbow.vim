@@ -220,7 +220,6 @@ command -nargs=0 RbDarkFg :call RbLightTheme()
 " `:RbDarkFg` is useful if you find the dark/light theme names confusing.
 
 
-
 let g:RbActive = 0
 " This variable is (and should be) set to 1 whenever any rainbow syntax is applied.
 " Otherwise, if you don't do that, then the `:Rb` toggle will need to be called 
@@ -405,6 +404,24 @@ command -nargs=0 RainbowToggle :call Rb()
 
 
 
+function RbSync()
+  if g:RbActive == 0
+    call RbOff()
+  elseif g:RbActive == 1
+    call RbOn()
+  endif
+endfunction
+command -nargs=0 RbSync :call RbSync()
+" If the current rainbow highlighting state somehow doesn't 
+" match the underlying state then this will synchronize them.
+"
+" Desynchronization of the highlighting happens whenever an
+" unnamed buffer is saved to a named file. This fixes it:
+
+autocmd BufWritePost * call RbSync()
+
+
+
 " =====================================================================================
 "   BASIC SETUP
 " =====================================================================================
@@ -427,6 +444,7 @@ call RbOn()
 
 " Set up file-type associations (or the lack thereof):
 " ----------------------------------------------------
+
 
 " Look for text of the form `*.file_extension` below.
 " 

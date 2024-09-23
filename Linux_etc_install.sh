@@ -3,4 +3,4 @@
 #
 # It is intended for use with Linux/BSD/Unix operating systems.
 
-cp "rainbow.vim" "~\.vim\plugins"
+cp "rainbow.vim" "~\.vim\plugin"
