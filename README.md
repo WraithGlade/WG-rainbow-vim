@@ -76,8 +76,8 @@ The Git repo also includes very small shell scripts for more easily/quickly sync
 
 You don't need to concern yourself with that though if you intend to just drag and drop `rainbow.vim` to your Vim `plugin` folder. All these extra scripts do is perform the copying for you automatically:
 
-- `Windows_install.bat`: copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugins`
-- `Linux_etc_install.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugins`
+- `Windows_install.bat`: copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugin`
+- `Linux_etc_install.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugin`
 
 On Windows, double-clicking a Batch/CMD (`.bat`) file will run it automatically, like an installer or EXE.
 
