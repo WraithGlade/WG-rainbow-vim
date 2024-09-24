@@ -28,7 +28,7 @@ A wide range of useful shorthand commands are included. The most useful are:
 
 - `:Rb` or `:RbToggle` or `:Rainbow` or `:RainbowToggle`: disable/enable (flipping back and forth) the rainbow highlighting (without disabling other syntax highlighting)
 - `:RbOff`: disable all rainbow highlighting (without disabling other syntax highlighting)
-- `:RbOn`: enable all rainbow highlighting (without disabling other syntax highlighting)
+- `:RbOn`: enable all rainbow highlighting (without enabling other syntax highlighting)
 - `:RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`: use light colors (for use with a dark background)
 - `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`: use dark colors (for use with a light background)
 
