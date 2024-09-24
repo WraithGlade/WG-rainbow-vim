@@ -43,6 +43,7 @@ The following less commonly used commands are also included:
 - `:RbOnlyParenSquare`: enable rainbow highlighting for parentheses and square brackets *only*, disabling  the others
 - `:RbOnlyParenSquiggle`: enable rainbow highlighting for parentheses and squiggle brackets *only*, disabling  the others
 - `:RbOnlySquareSquiggle`: enable rainbow highlighting for square brackets and squiggle brackets *only*, disabling  the others
+- `:RbSync`: corrects highlighting to match internal tracked state (shouldn't ever need to be used unless there is a bug, but it could be useful if there is and it is also used internally by the implementation)
 
 **Type any of the above commands into Vim to use them anytime you want!**
 
