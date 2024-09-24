@@ -540,6 +540,16 @@ autocmd BufNewFile,BufRead * source <sfile>
 "
 " Racket, Steel Bank Common Lisp, and Janet all of have very good Windows support.
 " Other languages mentioned above may also, but I haven't tested them as much or at all.
+" 
+" Fennel is another interesting Lisp/Scheme family lanuage. It transpiles to
+" Lua and has full compatibility with it, which makes it possible to use
+" Fennel anywhere where Lua is used (and Lua is the most popular overall
+" embedding scripting language for applications in the software industry). This makes
+" Fennel a great option for 'using Lisp/Scheme anywhere'. Moreover, if the
+" resulting code is run on LuaJIT then the performance is very good, perhaps
+" just modestly worse than something like Java or C#, hence perhaps as performant as
+" SBCL or faster. It is another great choice, though less widely known.
+" It is compatible with basically any Lua codebase (e.g. the Love game engine, etc).
 
 " See the following GitHub repo for a huge list of Lisp/Scheme languages and implementations:
 " 
