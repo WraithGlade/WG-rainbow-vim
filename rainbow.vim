@@ -83,7 +83,11 @@
 " 
 " Likewise, choose either `RbCustomColors()` or `RbNamedColors()`, whichever you prefer,
 " and then ensure it is the one called in BASIC SETUP section below. Only one applies.
-" `RbCustomColors()` is more flexible though and is the default.
+" `RbCustomColors()` is more flexible though (it allows hex color codes) and is the default.
+" 
+" The default *named* colors are more visually distinct and have higher contrast
+" but also look less aesthetically consistent and blend less naturally with the background.
+" Try both and see what you prefer. There is always a tradeoff between consistency and contrast.
 " 
 " You can also call any of this script's functions at runtime by writing just `:FuncName` 
 " during normal Vim use. There are also other shorthand versions and alt names available 
@@ -116,6 +120,10 @@
 " - The color mode functions (`RbCustomColors` and `RbNamedColors`) break
 "   things sometimes when called during normal Vim use *outside of this script*.
 "   You'll need to set colors in advance. 
+"   
+" - If run via GVim, then the file type needs to be specified for the colors to show.
+"   So, you need to use `gvim file.ext` for GVim, whereas both `vim`
+"   and `vim file.ext` work for console-based Vim.
 
 
 
@@ -175,7 +183,14 @@ function RbDarkTheme()
   highlight level15c   ctermfg=Green       guifg=#c1cb00
   highlight level14c   ctermfg=Blue        guifg=#00df66
   highlight level13c   ctermfg=Cyan        guifg=#00d9c9
-  highlight level12c   ctermfg=Magenta     guifg=#3fd1ff
+  "highlight level12c   ctermfg=Magenta     guifg=#3fd1ff
+    "The above lv12 entry corresponded to the HSLuv based perceptual
+    "even split of colors into 8 colors around the full hue circle.
+    "However, I noticed it was hard to distinguish from the previous
+    "guifg (#4, lv13) and so I denormalized it and selected a more 
+    "distinct color via HSL (not HSLuv), which has a broader gamut.
+    "It is now HSL(225, 255, 180) instead of ~HSLuv(225, 255, 159):
+  highlight level12c   ctermfg=Magenta     guifg=#698fff
   highlight level11c   ctermfg=Yellow      guifg=#c3baff
   highlight level10c   ctermfg=Red         guifg=#ffa3f2
   highlight level9c    ctermfg=Green       guifg=#ffabbb
@@ -200,7 +215,14 @@ function RbLightTheme()
   highlight level15c   ctermfg=DarkGreen       guifg=#343600
   highlight level14c   ctermfg=DarkBlue        guifg=#003d17
   highlight level13c   ctermfg=DarkCyan        guifg=#003b36
-  highlight level12c   ctermfg=DarkMagenta     guifg=#003949
+  "highlight level12c   ctermfg=DarkMagenta     guifg=#003949
+    "The above lv12 entry corresponded to the HSLuv based perceptual
+    "even split of colors into 8 colors around the full hue circle.
+    "However, I noticed it was hard to distinguish from the previous
+    "guifg (#4, lv13) and so I denormalized it and selected a more 
+    "distinct color via HSL (not HSLuv), which has a broader gamut.
+    "It is now HSL(225, 255, 75) instead of HSLuv(225, 255, 55):
+  highlight level12c   ctermfg=DarkMagenta     guifg=#002596
   highlight level11c   ctermfg=DarkYellow      guifg=#3500a3
   highlight level10c   ctermfg=DarkRed         guifg=#63005a
   highlight level9c    ctermfg=DarkGreen       guifg=#6d002b

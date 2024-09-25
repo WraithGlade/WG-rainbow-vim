@@ -70,6 +70,12 @@ If you use `:syntax off` at any point then the script may stop working and you m
 - The color mode functions (`RbCustomColors` and `RbNamedColors`) break
   things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set colors in advance.
 
+- If run via GVim, then the file type needs to be specified for the colors to show.
+  So, you need to use `gvim file.ext` for GVim, whereas both `vim`
+  and `vim file.ext` work for console-based Vim.
+
+
+
 ## Miscellaneous Utilities
 
 The Git repo also includes very small shell scripts for more easily/quickly synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (Otherwise, one might be tempted to bloat Vim's config directories by placing the full Git repo there.)
