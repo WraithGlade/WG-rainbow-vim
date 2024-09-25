@@ -12,7 +12,7 @@ This script is based/built upon John Gilmore's original "Rainbow Parenthesis" *[
 
 This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) dependencies. It doesn't muck around with anything on your system. It is strictly a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.
 
-The core guiding principle of this script is to make it as easy to use as possible *without overengineering it* and *without requiring any third party dependencies*. Imperfect but reliable pragmatism is better than polluting the user's system. Reliability and ease matter more than ideology.
+The core guiding principle of this script is to make it as easy to use as possible *without overengineering it* and *without requiring any third party dependencies*. Imperfect but reliable pragmatism is better than polluting the user's system or imposing needless tedium on them. Reliability and ease of use matter more than ideology!
 
 ## Script Usage
 
@@ -26,11 +26,12 @@ Modify the `autocmd` lines inside of `rainbow.vim` if you don't want it to apply
 
 A wide range of useful shorthand commands are included. The most useful are:
 
-- `:Rb` or `:RbToggle` or `:Rainbow` or `:RainbowToggle`: disable/enable (flipping back and forth) the rainbow highlighting (without disabling other syntax highlighting)
+- `:Rb` (or `:RbToggle` or `:Rainbow` or `:RainbowToggle`): disable/enable (flipping back and forth) the rainbow highlighting (without disabling other syntax highlighting)
 - `:RbOff`: disable all rainbow highlighting (without disabling other syntax highlighting)
 - `:RbOn`: enable all rainbow highlighting (without enabling other syntax highlighting)
-- `:RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`: use light colors (for use with a dark background)
-- `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`: use dark colors (for use with a light background)
+- `:RbDark` (or `RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`): applies a dark color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *light* foreground colors)
+- `:RbLight` (or `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`): applies a light color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *dark* foreground colors)
+- `:RbHi` (or `:RbHighContrast` or `RbHiContrast` or `RbHiCon`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive colors, but also tweaked for usability) 
 
 The following less commonly used commands are also included:
 
@@ -57,7 +58,7 @@ If you use `:syntax off` at any point then the script may stop working and you m
 
 - At nesting levels above 16, the syntax highlighting of closing delimiters 
   may become mismatched! Such deep nesting is hard to understand regardless though.
-  A core principle of this script (compared to other rainbow highlighters) is not to overengineer it though, so this may never be fixed. 
+  A core principle of this script (compared to other rainbow highlighters) is not to overengineer it though, so this might never be fixed. 
   (Vim's console color implementation also appears to have some baked-in 
   assumptions about 16 console colors max existing too.)
 
@@ -67,12 +68,8 @@ If you use `:syntax off` at any point then the script may stop working and you m
   the provided rainbow commands such as `:RbToggle`, `:RbOff`, and `:RbOn` instead.
   (You may need to close and reopen Vim if you do use `:syntax off`.)
   
-- The color mode functions (`RbCustomColors` and `RbNamedColors`) break
-  things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set colors in advance.
-
-- If run via GVim, then the file type needs to be specified for the colors to show.
-  So, you need to use `gvim file.ext` for GVim, whereas both `vim`
-  and `vim file.ext` work for console-based Vim.
+- The color *mode* functions (`RbCustomColors` and `RbNamedColors`) break
+  things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set the color *mode* in advance. (Don't confuse the color *mode* with the color themes though! The color themes (in contrast to the two *modes*) can be applied at any time and as often as you want! For example, try typing `:RbDark`, `:RbLight`, or `:RbHi` at any time.)  
 
 
 
@@ -91,4 +88,4 @@ On Windows, double-clicking a Batch/CMD (`.bat`) file will run it automatically,
 
 The `rainbow.vim` file's comments also contain a section giving recommendations on what Lisp/Scheme-like languages you may want to use or explore and what their most salient advantages and disadvantages are. 
 
-Search `rainbow.vim` for the section titled "If you're having trouble deciding what language to use" if you want to read those recommendations and potentially broaden your awareness of some related s-expression based languages.
+Search `rainbow.vim` for the section titled "If you're having trouble deciding what language to use" if you want to read those recommendations and potentially broaden your awareness of some related s-expression based programming languages.

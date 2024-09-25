@@ -78,16 +78,19 @@
 " Jump to the section labeled BASIC SETUP in the below Vimscript code.
 " (Just type `/BASIC SETUP<Enter>` in Vim and you'll get there.)
 "  
-" Modify the script to call either `RbDarkTheme()` or `RbLightTheme()` by default according to
-" whether you are using a dark or light color theme. That way, it'll be more readable.
+" Modify the script to call `RbDarkTheme()`, `RbLightTheme()`, or `RbHighContrast` by default 
+" according to your preferences. For custom colors, the dark and light themes are more uniform 
+" but the contrast gaps between successive colors are much smaller than in `RbHighContrast`.
 " 
 " Likewise, choose either `RbCustomColors()` or `RbNamedColors()`, whichever you prefer,
 " and then ensure it is the one called in BASIC SETUP section below. Only one applies.
 " `RbCustomColors()` is more flexible though (it allows hex color codes) and is the default.
 " 
-" The default *named* colors are more visually distinct and have higher contrast
-" but also look less aesthetically consistent and blend less naturally with the background.
-" Try both and see what you prefer. There is always a tradeoff between consistency and contrast.
+" Try them all and see what you prefer. There is always a tradeoff between consistency and contrast.
+" Remember though that you can switch themes any time mid-session by calling the corresponding 
+" command. This is especially useful via `:RbHi` for increasing contrast temporarily so that
+" you can see in high contrast when needed and then set it back to something else afterwards.
+" Try switching back and forth between `:RbDark` (or `:RbLight`) and `:RbHi` to see what I mean.
 " 
 " You can also call any of this script's functions at runtime by writing just `:FuncName` 
 " during normal Vim use. There are also other shorthand versions and alt names available 
@@ -96,7 +99,7 @@
 " The `:Rb` command is especially useful, since it toggles the rainbow highlighter on and off.
 " Many other highly useful commands were included as well though. Take a look! Make your own too!
 " 
-" You can also modify the individual color assignments within `RbLight` and/or `RbDark`
+" You can also modify the individual color assignments within the color theme functions
 " to suit your prefrences, or create your own named color theme functions and call them.
 
 
@@ -120,10 +123,6 @@
 " - The color mode functions (`RbCustomColors` and `RbNamedColors`) break
 "   things sometimes when called during normal Vim use *outside of this script*.
 "   You'll need to set colors in advance. 
-"   
-" - If run via GVim, then the file type needs to be specified for the colors to show.
-"   So, you need to use `gvim file.ext` for GVim, whereas both `vim`
-"   and `vim file.ext` work for console-based Vim.
 
 
 
@@ -137,9 +136,6 @@ function RbCustomColors()
   " See https://stackoverflow.com/questions/61832656/where-to-find-list-of-colors-for-vim 
   " (specifically https://stackoverflow.com/a/61833431) for more info.
   "
-  " I've set the default colors for `guifg` mode to have approximately
-  " equal luminosity via the HSLuv color model, which (unlike HSL) accounts for
-  " human eyesight. I've evenly divided such colors 8x by hue, conserving luminosity.
 endfunction
 " Calling this function outside this script is known to break things sometimes.
 " Thus, no shorthand `command` version is provided for it, to discourage errors.
@@ -174,36 +170,38 @@ endfunction
 " Thus `#ff0000` is full red, `#00ff00` is full green, `#808080` is mid grey, etc.
 " 
 " The higher the contrast between foreground and background and between successive
-" color hues, saturations, and lightnesses, the easier it'll be to
-" distinguish deeply nested nearby delimiters' matching pairs.
+" color hues, saturations, and lightnesses, the easier it'll be to distinguish deeply 
+" nested nearby delimiters' matching pairs, but the more your choices will be
+" forced to go a certain way. Thus, a good color theme is often a balancing act.
+
+
+
+" For the default dark and light themes, I've set the colors for `guifg` mode to have 
+" approximately equal luminosity via the HSLuv color model, which (unlike HSL) accounts 
+" for human eyesight. I've evenly divided such colors 8x by hue, conserving luminosity.
 
 function RbDarkTheme()
   " Intended for dark backgrounds, thus assigns *light* foreground (fg) colors:
-  highlight level16c   ctermfg=Red         guifg=#ffb25c
-  highlight level15c   ctermfg=Green       guifg=#c1cb00
-  highlight level14c   ctermfg=Blue        guifg=#00df66
-  highlight level13c   ctermfg=Cyan        guifg=#00d9c9
-  "highlight level12c   ctermfg=Magenta     guifg=#3fd1ff
-    "The above lv12 entry corresponded to the HSLuv based perceptual
-    "even split of colors into 8 colors around the full hue circle.
-    "However, I noticed it was hard to distinguish from the previous
-    "guifg (#4, lv13) and so I denormalized it and selected a more 
-    "distinct color via HSL (not HSLuv), which has a broader gamut.
-    "It is now HSL(225, 255, 180) instead of ~HSLuv(225, 255, 159):
-  highlight level12c   ctermfg=Magenta     guifg=#698fff
-  highlight level11c   ctermfg=Yellow      guifg=#c3baff
-  highlight level10c   ctermfg=Red         guifg=#ffa3f2
-  highlight level9c    ctermfg=Green       guifg=#ffabbb
-  highlight level8c    ctermfg=Blue        guifg=#ffb25c
-  highlight level7c    ctermfg=Cyan        guifg=#c1cb00
-  highlight level6c    ctermfg=Magenta     guifg=#00df66
-  highlight level5c    ctermfg=Yellow      guifg=#00d9c9
-  highlight level4c    ctermfg=Red         guifg=#3fd1ff
-  highlight level3c    ctermfg=Green       guifg=#c3baff
-  highlight level2c    ctermfg=Blue        guifg=#ffa3f2
-  highlight level1c    ctermfg=Cyan        guifg=#ffabbb
+  "   (`guifg` color formula: Rebelle HSLuv(45 + 45n, 255, 160)
+  highlight level16c   ctermfg=Red         guifg=#d28800
+  highlight level15c   ctermfg=Green       guifg=#979f00
+  highlight level14c   ctermfg=Blue        guifg=#00af4e
+  highlight level13c   ctermfg=Yellow      guifg=#00aa9e
+  highlight level12c   ctermfg=Magenta     guifg=#00a5cc
+  highlight level11c   ctermfg=Cyan        guifg=#9987ff
+  highlight level10c   ctermfg=Red         guifg=#ff43eb
+  highlight level9c    ctermfg=Green       guifg=#ff5f8a
+  highlight level8c    ctermfg=Blue        guifg=#d28800
+  highlight level7c    ctermfg=Yellow      guifg=#979f00
+  highlight level6c    ctermfg=Magenta     guifg=#00af4e
+  highlight level5c    ctermfg=Cyan        guifg=#00aa9e
+  highlight level4c    ctermfg=Red         guifg=#00a5cc
+  highlight level3c    ctermfg=Green       guifg=#9987ff
+  highlight level2c    ctermfg=Blue        guifg=#ff43eb
+  highlight level1c    ctermfg=Yellow      guifg=#ff5f8a
 endfunction
 command -nargs=0 RbDarkTheme :call RbDarkTheme()
+command -nargs=0 RbDark :call RbDarkTheme()
 command -nargs=0 RbDarkBg :call RbDarkTheme()
 command -nargs=0 RbLightFg :call RbDarkTheme()
 " 'Fg' stands for 'foreground' color. 'Bg' stands for 'background' color.
@@ -211,35 +209,58 @@ command -nargs=0 RbLightFg :call RbDarkTheme()
 
 function RbLightTheme()
   " Intended for light backgrounds, thus assigns *dark* foreground (fg) colors:
-  highlight level16c   ctermfg=DarkRed         guifg=#4b2d00
-  highlight level15c   ctermfg=DarkGreen       guifg=#343600
-  highlight level14c   ctermfg=DarkBlue        guifg=#003d17
-  highlight level13c   ctermfg=DarkCyan        guifg=#003b36
-  "highlight level12c   ctermfg=DarkMagenta     guifg=#003949
-    "The above lv12 entry corresponded to the HSLuv based perceptual
-    "even split of colors into 8 colors around the full hue circle.
-    "However, I noticed it was hard to distinguish from the previous
-    "guifg (#4, lv13) and so I denormalized it and selected a more 
-    "distinct color via HSL (not HSLuv), which has a broader gamut.
-    "It is now HSL(225, 255, 75) instead of HSLuv(225, 255, 55):
-  highlight level12c   ctermfg=DarkMagenta     guifg=#002596
-  highlight level11c   ctermfg=DarkYellow      guifg=#3500a3
-  highlight level10c   ctermfg=DarkRed         guifg=#63005a
-  highlight level9c    ctermfg=DarkGreen       guifg=#6d002b
-  highlight level8c    ctermfg=DarkBlue        guifg=#4b2d00
-  highlight level7c    ctermfg=DarkCyan        guifg=#343600
-  highlight level6c    ctermfg=DarkMagenta     guifg=#003d17
-  highlight level5c    ctermfg=DarkYellow      guifg=#003b36
-  highlight level4c    ctermfg=DarkRed         guifg=#003949
-  highlight level3c    ctermfg=DarkGreen       guifg=#3500a3
-  highlight level2c    ctermfg=DarkBlue        guifg=#63005a
-  highlight level1c    ctermfg=DarkCyan        guifg=#6d002b
+  "   (`guifg` color formula: Rebelle HSLuv(45 + 45n, 255, 96)
+  highlight level16c   ctermfg=DarkRed         guifg=#7d4f00
+  highlight level15c   ctermfg=DarkGreen       guifg=#585d00
+  highlight level14c   ctermfg=DarkBlue        guifg=#00672b
+  highlight level13c   ctermfg=DarkYellow      guifg=#00645c
+  highlight level12c   ctermfg=DarkMagenta     guifg=#006179
+  highlight level11c   ctermfg=DarkCyan        guifg=#5b12ff
+  highlight level10c   ctermfg=DarkRed         guifg=#a20095
+  highlight level9c    ctermfg=DarkGreen       guifg=#b1004a
+  highlight level8c    ctermfg=DarkBlue        guifg=#7d4f00
+  highlight level7c    ctermfg=DarkYellow      guifg=#585d00
+  highlight level6c    ctermfg=DarkMagenta     guifg=#00672b
+  highlight level5c    ctermfg=DarkCyan        guifg=#00645c
+  highlight level4c    ctermfg=DarkRed         guifg=#006179
+  highlight level3c    ctermfg=DarkGreen       guifg=#5b12ff
+  highlight level2c    ctermfg=DarkBlue        guifg=#a20095
+  highlight level1c    ctermfg=DarkYellow      guifg=#b1004a
 endfunction
 command -nargs=0 RbLightTheme :call RbLightTheme()
+command -nargs=0 RbLight :call RbLightTheme()
 command -nargs=0 RbLightBg :call RbLightTheme()
 command -nargs=0 RbDarkFg :call RbLightTheme()
 " 'FG' stands for 'foreground' color. 'BG' stands for 'background' color.
 " `:RbDarkFg` is useful if you find the dark/light theme names confusing.
+
+function RbHighContrast()
+  " Intended for high color component contrast for easier discernment.
+  " The `ctermfg` variant uses *actual* maximum component contrast, but the `guifg`
+  " version tweaks the colors for aesthetics and so that the theme works better on both
+  " dark and light backgrounds (though imperfectly, because of competing goals).
+  highlight level16c   ctermfg=Red         guifg=#ff0000
+  highlight level15c   ctermfg=Green       guifg=#00bf00
+  highlight level14c   ctermfg=Blue        guifg=#0080ff
+  highlight level13c   ctermfg=Yellow      guifg=#ff8000
+  highlight level12c   ctermfg=Magenta     guifg=#8000ff
+  highlight level11c   ctermfg=Cyan        guifg=#00bfbf
+  highlight level10c   ctermfg=Red         guifg=#ff0000
+  highlight level9c    ctermfg=Green       guifg=#00bf00
+  highlight level8c    ctermfg=Blue        guifg=#0080ff
+  highlight level7c    ctermfg=Yellow      guifg=#ff8000
+  highlight level6c    ctermfg=Magenta     guifg=#8000ff
+  highlight level5c    ctermfg=Cyan        guifg=#00bfbf
+  highlight level4c    ctermfg=Red         guifg=#ff0000
+  highlight level3c    ctermfg=Green       guifg=#00bf00
+  highlight level2c    ctermfg=Blue        guifg=#0080ff
+  highlight level1c    ctermfg=Yellow      guifg=#ff8000
+endfunction
+command -nargs=0 RbHighContrast :call RbHighContrast()
+command -nargs=0 RbHiContrast :call RbHighContrast()
+command -nargs=0 RbHiCon :call RbHighContrast()
+command -nargs=0 RbHi :call RbHighContrast()
+
 
 
 let g:RbActive = 0
@@ -458,7 +479,7 @@ autocmd BufWritePost * call RbSync()
 " Then, change which functions are called below to suit your preferences:
 
 call RbCustomColors()
-call RbDarkTheme()
+call RbHighContrast()
 
 call RbOn()
 
@@ -466,7 +487,6 @@ call RbOn()
 
 " Set up file-type associations (or the lack thereof):
 " ----------------------------------------------------
-
 
 " Look for text of the form `*.file_extension` below.
 " 
@@ -481,39 +501,40 @@ call RbOn()
 
 " To apply rainbow to ALL files types (including unspecified and/or unknown ones):
 
-autocmd BufNewFile,BufRead * source <sfile>
+autocmd BufNewFile,BufRead,GUIEnter * source <sfile>
 
 " WARNING: The below will have NO USEFUL EFFECT if the above line isn't commented out.
 
+
 " For Common Lisp:
 " ----------------
-"autocmd BufNewFile,BufRead *.lisp source <sfile>
-"autocmd BufNewFile,BufRead *.cl source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.lisp source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.cl source <sfile>
 
 " For Racket (the most popular Scheme-like language):
 " ---------------------------------------------------
-"autocmd BufNewFile,BufRead *.rkt source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.rkt source <sfile>
 
 " For various 'Scheme language standard adhering' languages or DSLs:
 " ------------------------------------------------------------------
-"autocmd BufNewFile,BufRead *.scm source <sfile>
-"autocmd BufNewFile,BufRead *.ss source <sfile>
-"autocmd BufNewFile,BufRead *.sc source <sfile>
-"autocmd BufNewFile,BufRead *.sps source <sfile>
-"autocmd BufNewFile,BufRead *.sls source <sfile>
-"autocmd BufNewFile,BufRead *.sld source <sfile>
-"autocmd BufNewFile,BufRead *.scr source <sfile>
-"autocmd BufNewFile,BufRead *.sps7 source <sfile>
-"autocmd BufNewFile,BufRead *.scrbl source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.scm source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.ss source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.sc source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.sps source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.sls source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.sld source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.scr source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.sps7 source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.scrbl source <sfile>
 
 " Scheme is not well standardized and has no standard file extension.
 " Indeed, the Scheme 'language standard' no longer has much influence.
 
 " For Clojure:
 " ------------
-"autocmd BufNewFile,BufRead *.clj source <sfile>
-"autocmd BufNewFile,BufRead *.cljs source <sfile>
-"autocmd BufNewFile,BufRead *.cljc source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.clj source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.cljs source <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.cljc source <sfile>
 
 " `.clj` is for Clojure.
 " `.cljs` is for ClojureScript.
@@ -521,7 +542,11 @@ autocmd BufNewFile,BufRead * source <sfile>
 
 " For Janet:
 " ----------
-"autocmd BufNewFile,BufRead *.janet so <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.janet so <sfile>
+
+" For Fennel:
+" ----------
+"autocmd BufNewFile,BufRead,GUIEnter *.fnl so <sfile>
 
 
 
