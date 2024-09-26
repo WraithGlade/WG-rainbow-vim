@@ -31,7 +31,7 @@ A wide range of useful shorthand commands are included. The most useful are:
 - `:RbOn`: enable all rainbow highlighting (without enabling other syntax highlighting)
 - `:RbDark` (or `RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`): applies a dark color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *light* foreground colors)
 - `:RbLight` (or `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`): applies a light color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *dark* foreground colors)
-- `:RbHi` (or `:RbHighContrast` or `RbHiContrast` or `RbHiCon`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive colors, but also tweaked for usability) 
+- `:RbHi` (or `:RbHighContrast` or `:RbHiContrast` or `:RbHiCon` or `:RbHigh`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive nested delimiter highlighting colors, but also tweaked for broader usability and more pleasing aesthetics than true max contrast would have) 
 
 The following less commonly used commands are also included:
 
@@ -69,7 +69,7 @@ If you use `:syntax off` at any point then the script may stop working and you m
   (You may need to close and reopen Vim if you do use `:syntax off`.)
   
 - The color *mode* functions (`RbCustomColors` and `RbNamedColors`) break
-  things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set the color *mode* in advance. (Don't confuse the color *mode* with the color themes though! The color themes (in contrast to the two *modes*) can be applied at any time and as often as you want! For example, try typing `:RbDark`, `:RbLight`, or `:RbHi` at any time.)  
+  things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set the color *mode* in advance. (Don't confuse the color *mode* with the color themes though! The color themes (in contrast to the two *modes*) can be applied at any time and as often as you want! Thus, feel free to use `:RbDark`, `:RbLight`, or `:RbHi` (etc) at any time... but be wary of ever running `:call RbCustomColors()` or `:call RbNamedColors()` outside of `rainbow.vim`.)  
 
 
 
@@ -83,6 +83,17 @@ You don't need to concern yourself with that though if you intend to just drag a
 - `Linux_etc_install.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugin`
 
 On Windows, double-clicking a Batch/CMD (`.bat`) file will run it automatically, like an installer or EXE.
+
+There are also now corresponding uninstall scripts that undo the installs:
+
+- `Windows_uninstall.bat`: deletes `rainbow.vim` from `%userprofile%\vimfiles\plugin`
+- `Linux_etc_uninstall.sh`: deletes `rainbow.vim` from `~\.vim\plugin`
+
+All of the scripts will ask for confirmations and will tell you what they ended up actually doing to the files (whenever possible for the corresponding operating system commands).
+
+These scripts together enable a faster workflow for managing changes to `rainbow.vim`.
+
+Anything that aids the user's experience using software (no matter how slightly) is usually worth doing! 
 
 ## Extras (Bonus)
 

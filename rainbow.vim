@@ -259,6 +259,7 @@ endfunction
 command -nargs=0 RbHighContrast :call RbHighContrast()
 command -nargs=0 RbHiContrast :call RbHighContrast()
 command -nargs=0 RbHiCon :call RbHighContrast()
+command -nargs=0 RbHigh :call RbHighContrast()
 command -nargs=0 RbHi :call RbHighContrast()
 
 
