@@ -8,15 +8,15 @@ It is especially useful for highly nested programming languages and/or those tha
 
 It is overlaid on whatever other syntax highlighting you use and will leave other things untouched.
 
-This script is based/built upon John Gilmore's original "Rainbow Parenthesis" *[sic]* (aka "RainbowParenthsis.vim" *[sic]*) script, which can be found on [John Gilmore's Vim.org page for it](https://www.vim.org/scripts/script.php?script_id=1230).
+The script was based/built upon John Gilmore's original "Rainbow Parenthesis" *[sic]* (aka "RainbowParenthsis.vim" *[sic]*) script (one of the very first rainbow syntax highlighter scripts ever made as far as I can tell), which can be found on [John Gilmore's Vim.org page for it](https://www.vim.org/scripts/script.php?script_id=1230), but my script has now significantly diverged from it, has many more features, is much more practical, and is much easier to use and customize.
 
-This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) dependencies. It doesn't muck around with anything on your system. It is strictly a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.
+This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) 3rd party dependencies. It doesn't muck around with anything on your system. It is strictly **a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.**
 
 The core guiding principle of this script is to make it as easy to use as possible *without overengineering it* and *without requiring any third party dependencies*. Imperfect but reliable pragmatism is better than polluting the user's system or imposing needless tedium on them. Reliability and ease of use matter more than ideology!
 
 ## Script Usage
 
-I have included very extensive documentation throughout the entire Vimscript file and you can learn everything you need to know from reading the `rainbow.vim` file. That way, the necessary info is all self-contained, even if you lose this `README.md` document. It doesn't contain the exact same info as this `README.md`, but it is similar. Either way, the script is extremely easy to use and modify.
+I have included very extensive documentation throughout the entire Vimscript file and you can learn everything you need to know from reading the `rainbow.vim` file. That way, the necessary info is all self-contained, even if you lose this `README.md` document. It doesn't contain the exact same info as this `README.md`, but it is similar. Either way, the script is very easy to use and modify.
 
 To use this script ("plugin"), all you have to do is place the script into your `%userprofile%/vimfiles/plugins` (on Windows) or `~/.vim/plugins` (on Linux/BSD/Unix) folder and it will load itself automatically whenever you use Vim. Running `Windows_install.bat` or `Linux_etc_install.sh` will try to do this automatically for you (like an installer).
 
@@ -31,7 +31,9 @@ A wide range of useful shorthand commands are included. The most useful are:
 - `:RbOn`: enable all rainbow highlighting (without enabling other syntax highlighting)
 - `:RbDark` (or `RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`): applies a dark color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *light* foreground colors)
 - `:RbLight` (or `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`): applies a light color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *dark* foreground colors)
-- `:RbHi` (or `:RbHighContrast` or `:RbHiContrast` or `:RbHiCon` or `:RbHigh`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive nested delimiter highlighting colors, but also tweaked for broader usability and more pleasing aesthetics than true max contrast would have) 
+- `:RbHi` (or `:RbHighContrast` or `:RbHiContrast` or `:RbHiCon` or `:RbHigh`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive nested delimiter highlighting colors, but also tweaked for broader usability and more pleasing aesthetics than true max contrast would have)
+- `:RbWh` (or `:RbWhiteStrobe` or `:RbWhite`): applies lightened greyscale-only delimiter highlighting, which results in *much worse contrast* but may be somewhat useful if your code already has way too much syntax color
+- `:RbBl` (or `:RbBlackStrobe` or `:RbBlack`): applies darkened greyscale-only delimiter highlighting, which results in *much worse contrast* but may be somewhat useful if your code already has way too much syntax color
 
 The following less commonly used commands are also included:
 
@@ -56,31 +58,29 @@ If you use `:syntax off` at any point then the script may stop working and you m
 
 ## Known Bugs and Limitations
 
-- At nesting levels above 16, the syntax highlighting of closing delimiters 
+- At nesting levels above 18, the syntax highlighting of closing delimiters 
   may become mismatched! Such deep nesting is hard to understand regardless though.
-  A core principle of this script (compared to other rainbow highlighters) is not to overengineer it though, so this might never be fixed. 
-  (Vim's console color implementation also appears to have some baked-in 
-  assumptions about 16 console colors max existing too.)
-
 
 - If `:syntax off` is used and then followed by `:syntax on` later,
   then the rainbow highlighter may not turn back on. So, as a workaround, use 
   the provided rainbow commands such as `:RbToggle`, `:RbOff`, and `:RbOn` instead.
-  (You may need to close and reopen Vim if you do use `:syntax off`.)
+  I've often seen `:syntax off` followed by `:RbOn` work, but not `:syntax on`!
+  If you call `:syntax on` you may need to close and reopen the Vim editor to fix it.
   
-- The color *mode* functions (`RbCustomColors` and `RbNamedColors`) break
-  things sometimes when called during normal Vim use *outside* of `rainbow.vim`. You'll need to set the color *mode* in advance. (Don't confuse the color *mode* with the color themes though! The color themes (in contrast to the two *modes*) can be applied at any time and as often as you want! Thus, feel free to use `:RbDark`, `:RbLight`, or `:RbHi` (etc) at any time... but be wary of ever running `:call RbCustomColors()` or `:call RbNamedColors()` outside of `rainbow.vim`.)  
-
-
+- The color mode functions (`RbCustomColors` and `RbNamedColors`) break
+  things sometimes when called during normal Vim use *outside of this script*.
+  This is not much of a problem though: Color *themes* can still be switched easily.
+  There's not much reason why you'd want to change the color mode once you pick it.
+  The color themes (in contrast to the two color *modes*) can be applied at any time and as often as you want! Thus, feel free to use `:RbDark`, `:RbLight`, or `:RbHi` (etc) at any time and as often as you like... but be wary of ever running `:call RbCustomColors()` or `:call RbNamedColors()` outside of `rainbow.vim`.
 
 ## Miscellaneous Utilities
 
-The Git repo also includes very small shell scripts for more easily/quickly synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (Otherwise, one might be tempted to bloat Vim's config directories by placing the full Git repo there.)
+The Git repo also includes very small shell scripts for more easily/quickly installing the rainbow script and/or synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (This make sit possible to keep the `rainbow.vim` source repo entirely separate from your Vim config folders to prevent junking them up.)
 
 You don't need to concern yourself with that though if you intend to just drag and drop `rainbow.vim` to your Vim `plugin` folder. All these extra scripts do is perform the copying for you automatically:
 
-- `Windows_install.bat`: copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugin`
-- `Linux_etc_install.sh`: copies `rainbow.vim` from the current directory to `~\.vim\plugin`
+- `Windows_install.bat`: just copies `rainbow.vim` from the current directory to `%userprofile%\vimfiles\plugin`
+- `Linux_etc_install.sh`: just copies `rainbow.vim` from the current directory to `~\.vim\plugin`
 
 On Windows, double-clicking a Batch/CMD (`.bat`) file will run it automatically, like an installer or EXE.
 

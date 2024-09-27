@@ -7,4 +7,4 @@ rem  It will warn users about overwrites and ask for confirmation.
 rem  
 rem  It is intended for use with Windows.
 
-xcopy /e /i "rainbow.vim" "%userprofile%\vimfiles\plugin"
+xcopy /-y ".\rainbow.vim" "%userprofile%\vimfiles\plugin\"
