@@ -32,8 +32,8 @@ A wide range of useful shorthand commands are included. The most useful are:
 - `:RbDark` (or `RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`): applies a dark color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *light* foreground colors)
 - `:RbLight` (or `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`): applies a light color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *dark* foreground colors)
 - `:RbHi` (or `:RbHighContrast` or `:RbHiContrast` or `:RbHiCon` or `:RbHigh`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive nested delimiter highlighting colors, but also tweaked for broader usability and more pleasing aesthetics than true max contrast would have)
-- `:RbWh` (or `:RbWhiteStrobe` or `:RbWhite`): applies lightened greyscale-only delimiter highlighting, which results in *much worse contrast* but may be somewhat useful if your code already has way too much syntax color
-- `:RbBl` (or `:RbBlackStrobe` or `:RbBlack`): applies darkened greyscale-only delimiter highlighting, which results in *much worse contrast* but may be somewhat useful if your code already has way too much syntax color
+- `:RbWh` (or `:RbWhiteStrobe` or `:RbWhite`): applies *lightened* greyscale-only delimiter highlighting, which results in *much worse contrast* but may be somewhat useful if your code already has way too much syntax color
+- `:RbBl` (or `:RbBlackStrobe` or `:RbBlack`): applies *darkened* greyscale-only delimiter highlighting, which results in *much worse contrast* but may be somewhat useful if your code already has way too much syntax color
 
 The following less commonly used commands are also included:
 
