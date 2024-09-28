@@ -341,7 +341,9 @@ command -nargs=0 RbBl :call RbBlackStrobe()
 
 
 
-let g:RbActive = 0
+if !exists("g:RbActive")
+  let g:RbActive = 0
+endif
 " This variable is (and should be) set to 1 whenever any rainbow syntax is applied.
 " Otherwise, if you don't do that, then the `:Rb` toggle will need to be called 
 " twice sometimes due to its state tracking getting out of sync with reality.
