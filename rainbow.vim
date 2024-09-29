@@ -121,6 +121,13 @@
 "   things sometimes when called during normal Vim use *outside of this script*.
 "   This is not much of a problem though: Color *themes* can still be switched easily.
 "   There's not much reason why you'd want to change the color mode once you pick it.
+"   
+" - The rainbow script/plugin currently seems to sometimes cause a rapid
+"   screen-flickering when loading or reloading files it seems. I am currently
+"   new to plugin design, so I suspect I have some kind of loading bug. I 
+"   will try to fix this. I have a feeling some aspect of how I am managing
+"   the loading (such as `autocmd` or just basic plugin loading) needs to be tweaked.
+"   The bug doesn't seem to happen when Vim is run with `vim --noplugin filename.ext`.
 
 
 
