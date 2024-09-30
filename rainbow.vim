@@ -556,7 +556,10 @@ command -nargs=0 RbSync :call RbSync()
 " Desynchronization of the highlighting happens whenever an
 " unnamed buffer is saved to a named file. This fixes it:
 
-autocmd BufWritePost * call RbSync()
+augroup RbFixGVim
+  autocmd!
+  autocmd BufWritePost * call RbSync()
+augroup END
 
 
 
@@ -593,6 +596,13 @@ call RbOn()
 " `BufNewFile` means apply the script to new (unsaved) files.
 " `BufRead` means apply the script to existing (saved) files.
 " `GUIEnter` means apply the script to GVim and was necessary to fix a related GVim bug.
+
+augroup RbFileAssociations
+autocmd!
+" Every use of `autocmd ...` is added as a separate instance, even if identical.
+" 
+" Hence, the `augroup ... autocmd!` idiom prevents *exponential growth* of redundant
+" copies of `autocmd` instances if/when a script file is reloaded.
 
 
 " To apply rainbow to ALL files types (including unspecified and/or unknown ones):
@@ -643,6 +653,8 @@ autocmd BufNewFile,BufRead,GUIEnter * source <sfile>
 " For Fennel:
 " ----------
 "autocmd BufNewFile,BufRead,GUIEnter *.fnl so <sfile>
+
+augroup END
 
 
 
