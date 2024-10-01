@@ -98,7 +98,9 @@ All of the scripts will ask for confirmations and will tell you what they ended 
 
 These scripts together enable a faster workflow for managing changes to `rainbow.vim`.
 
-Anything that aids the user's experience using software (no matter how slightly) is usually worth doing! 
+Anything that aids the user's experience using software (no matter how slightly) is usually worth doing!
+
+**PS**: Alternatively, for cases where you want to disable the rainbow syntax script without uninstalling it, you can run Vim with `vim --noplugin` instead of just `vim` and it'll disable all auto-loading of all plugins (not just `rainbow.vim`) in Vim's `plugin` folder, so that you can have a clean Vim instance whenever you want or need one. `vim --noplugin` is also useful for comparing Vim's behavior without plugins against Vim's behavior with plugins, such as for debugging or testing or clarifying your understanding of the system. If a bug doesn't happen with `vim --noplugin` but *does* with just `vim` then one or more plugins is likely contributing to it.
 
 ## Extras (Bonus)
 
