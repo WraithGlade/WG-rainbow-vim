@@ -121,20 +121,13 @@
 "   things sometimes when called during normal Vim use *outside of this script*.
 "   This is not much of a problem though: Color *themes* can still be switched easily.
 "   There's not much reason why you'd want to change the color mode once you pick it.
-"   
-" - The rainbow script/plugin currently seems to sometimes cause a rapid
-"   screen-flickering when loading or reloading files it seems. I am currently
-"   new to plugin design, so I suspect I have some kind of loading bug. I 
-"   will try to fix this. I have a feeling some aspect of how I am managing
-"   the loading (such as `autocmd` or just basic plugin loading) needs to be tweaked.
-"   The bug doesn't seem to happen when Vim is run with `vim --noplugin filename.ext`.
 
 
 
 " Color modes (named vs custom):
 " ------------------------------
 
-function RbCustomColors()
+function! RbCustomColors()
   set termguicolors
   " Makes arbitrary colors (via `guifg=#hexcode`) active if TrueColor is supported.
   " 
@@ -144,7 +137,7 @@ endfunction
 " Calling this function outside this script is known to break things sometimes.
 " Thus, no shorthand `command` version is provided for it, to discourage errors.
 
-function RbNamedColors()
+function! RbNamedColors()
   set termguicolors&
   " Tells the highlighter to use the named (`ctermfg`) colors instead of the `guifg`s.
   " 
@@ -188,7 +181,7 @@ endfunction
 " approximately equal luminosity via the HSLuv color model, which (unlike HSL) accounts 
 " for human eyesight. I've evenly divided such colors 6x by hue, ~conserving luminosity.
 
-function RbDarkTheme()
+function! RbDarkTheme()
   " Intended for dark backgrounds, thus assigns *light* foreground (fg) colors:
   "   `guifg` color formula: Rebelle HSLuv(20 + 60n, 255, 160) for n in 0..5
   "   where HSLuv(hue, saturation, luminosity) has max HSLuv(360, 255, 255)
@@ -218,7 +211,7 @@ command -nargs=0 RbLightFg :call RbDarkTheme()
 " 'Fg' stands for 'foreground' color. 'Bg' stands for 'background' color.
 " `:RbLightFg` is useful if you find the dark/light theme names confusing.
 
-function RbLightTheme()
+function! RbLightTheme()
   " Intended for light backgrounds, thus assigns *dark* foreground (fg) colors:
   "   `guifg` color formula: Rebelle HSLuv(20 + 60n, 255, 96) for n in 0..5
   "   where HSLuv(hue, saturation, luminosity) has max HSLuv(360, 255, 255)
@@ -257,7 +250,7 @@ command -nargs=0 RbDarkFg :call RbLightTheme()
 " For the `guifg` high contrast theme though, I adjusted the 'yellow' and 'magenta' 
 " to more usable and pleasing colors (orange and purple instead, respectively).
 
-function RbHighContrast()
+function! RbHighContrast()
   " Intended for high color component contrast for easier discernment.
   " The `ctermfg` variant uses *actual* maximum component contrast, but the `guifg`
   " version tweaks the colors for aesthetics and so that the theme works better on both
@@ -298,7 +291,7 @@ command -nargs=0 RbHi :call RbHighContrast()
 " even when each gap is a full 1/3 of the greyscale axis
 " per adjacent color jump, which is what I've done here.
 
-function RbWhiteStrobe()
+function! RbWhiteStrobe()
   highlight level18c   ctermfg=White       guifg=#ffffff
   highlight level17c   ctermfg=LightGrey   guifg=#a8a8a8
   highlight level16c   ctermfg=Grey        guifg=#545454
@@ -322,7 +315,7 @@ command -nargs=0 RbWhiteStrobe :call RbWhiteStrobe()
 command -nargs=0 RbWhite :call RbWhiteStrobe()
 command -nargs=0 RbWh :call RbWhiteStrobe()
 
-function RbBlackStrobe()
+function! RbBlackStrobe()
   highlight level18c   ctermfg=Black       guifg=#000000
   highlight level17c   ctermfg=DarkGrey    guifg=#545454
   highlight level16c   ctermfg=Grey        guifg=#a8a8a8
@@ -358,7 +351,7 @@ endif
 " I've 'coded defensively' in this respect, intentionally setting `g:RbActive` 
 " redundantly in every relevant function. This also improves readability slightly.
 
-function RbParen()
+function! RbParen()
   " The order of these declations matters. If you reverse them, it will break.
   syntax region level1 matchgroup=level1c start=/(/ end=/)/ contains=TOP,level1,level2,level3,level4,level5,level6,level7,level8,level9,level10,level11,level12,level13,level14,level15,level16,level17,level18,NoInParens
   syntax region level2 matchgroup=level2c start=/(/ end=/)/ contains=TOP,level2,level3,level4,level5,level6,level7,level8,level9,level10,level11,level12,level13,level14,level15,level16,level17,level18,NoInParens
@@ -382,7 +375,7 @@ function RbParen()
 endfunction
 command -nargs=0 RbParen :call RbParen()
 
-function RbSquare()
+function! RbSquare()
   " The order of these declations matters. If you reverse them, it will break.
   syntax region level1 matchgroup=level1c start=/\[/ end=/\]/ contains=TOP,level1,level2,level3,level4,level5,level6,level7,level8,level9,level10,level11,level12,level13,level14,level15,level16,level17,level18,NoInParens
   syntax region level2 matchgroup=level2c start=/\[/ end=/\]/ contains=TOP,level2,level3,level4,level5,level6,level7,level8,level9,level10,level11,level12,level13,level14,level15,level16,level17,level18,NoInParens
@@ -406,7 +399,7 @@ function RbSquare()
 endfunction
 command -nargs=0 RbSquare :call RbSquare()
 
-function RbSquiggle()
+function! RbSquiggle()
   " The order of these declations matters. If you reverse them, it will break.
   syntax region level1 matchgroup=level1c start=/{/ end=/}/ contains=TOP,level1,level2,level3,level4,level5,level6,level7,level8,level9,level10,level11,level12,level13,level14,level15,level16,level17,level18,NoInParens
   syntax region level2 matchgroup=level2c start=/{/ end=/}/ contains=TOP,level2,level3,level4,level5,level6,level7,level8,level9,level10,level11,level12,level13,level14,level15,level16,level17,level18,NoInParens
@@ -432,7 +425,7 @@ command -nargs=0 RbSquiggle :call RbSquiggle()
 
 
 
-function RbOn()
+function! RbOn()
   call RbParen()
   call RbSquare()
   call RbSquiggle()
@@ -440,7 +433,7 @@ function RbOn()
 endfunction
 command -nargs=0 RbOn :call RbOn()
 
-function RbOff()
+function! RbOff()
   syntax clear level18
   syntax clear level17
   syntax clear level16
@@ -470,7 +463,7 @@ command -nargs=0 RbOff :call RbOff()
 " 
 " However, here are the workarounds anyway, for your convenience:
 
-function RbOnlyParen()
+function! RbOnlyParen()
   call RbOff()
   call RbParen()
   let g:RbActive = 1
@@ -478,7 +471,7 @@ endfunction
 command -nargs=0 RbOnlyParen :call RbOnlyParen()
 command -nargs=0 RbOParen :call RbOnlyParen()
 
-function RbOnlySquare()
+function! RbOnlySquare()
   call RbOff()
   call RbSquare()
   let g:RbActive = 1
@@ -486,7 +479,7 @@ endfunction
 command -nargs=0 RbOnlySquare :call RbOnlySquare()
 command -nargs=0 RbOSquare :call RbOnlySquare()
 
-function RbOnlySquiggle()
+function! RbOnlySquiggle()
   call RbOff()
   call RbSquiggle()
   let g:RbActive = 1
@@ -494,7 +487,7 @@ endfunction
 command -nargs=0 RbOnlySquiggle :call RbOnlySquiggle()
 command -nargs=0 RbOSquiggle :call RbOnlySquiggle()
 
-function RbOnlyParenSquare()
+function! RbOnlyParenSquare()
   call RbOff()
   call RbParen()
   call RbSquare()
@@ -503,7 +496,7 @@ endfunction
 command -nargs=0 RbOnlyParenSquare :call RbOnlyParenSquare()
 command -nargs=0 RbOParenSquare :call RbOnlyParenSquare()
 
-function RbOnlyParenSquiggle()
+function! RbOnlyParenSquiggle()
   call RbOff()
   call RbParen()
   call RbSquiggle()
@@ -512,7 +505,7 @@ endfunction
 command -nargs=0 RbOnlyParenSquiggle :call RbOnlyParenSquiggle()
 command -nargs=0 RbOParenSquiggle :call RbOnlyParenSquiggle()
 
-function RbOnlySquareSquiggle()
+function! RbOnlySquareSquiggle()
   call RbOff()
   call RbSquare()
   call RbSquiggle()
@@ -524,7 +517,7 @@ command -nargs=0 RbOSquareSquiggle :call RbOnlySquareSquiggle()
 
 
 " Function for toggling rainbow highlighting of delimiters on and off easily:
-function Rb()
+function! Rb()
   if g:RbActive == 0
     call RbOn()
     let g:RbActive = 1
@@ -542,7 +535,7 @@ command -nargs=0 RainbowToggle :call Rb()
 
 
 
-function RbSync()
+function! RbSync()
   if g:RbActive == 0
     call RbOff()
   elseif g:RbActive == 1
@@ -559,7 +552,7 @@ command -nargs=0 RbSync :call RbSync()
 augroup RbFixGVim
   autocmd!
   autocmd BufWritePost * call RbSync()
-augroup END
+augroup end
 
 
 
@@ -654,7 +647,7 @@ autocmd BufNewFile,BufRead,GUIEnter * source <sfile>
 " ----------
 "autocmd BufNewFile,BufRead,GUIEnter *.fnl so <sfile>
 
-augroup END
+augroup end
 
 
 
@@ -725,4 +718,3 @@ augroup END
 " When I tried to put the above `autocmd` lines into separate
 " function(s), it caused loading errors whenever I loaded
 " `rainbow.vim` itself, and so I decided against that.
-

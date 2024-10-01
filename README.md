@@ -72,17 +72,12 @@ If you use `:syntax off` at any point then the script may stop working and you m
 - The color mode functions (`RbCustomColors` and `RbNamedColors`) break
   things sometimes when called during normal Vim use *outside of this script*.
   This is not much of a problem though: Color *themes* can still be switched easily.
-  There's not much reason why you'd want to change the color mode once you pick it.
-  The color themes (in contrast to the two color *modes*) can be applied at any time and as often as you want! Thus, feel free to use `:RbDark`, `:RbLight`, or `:RbHi` (etc) at any time and as often as you like... but be wary of ever running `:call RbCustomColors()` or `:call RbNamedColors()` outside of `rainbow.vim`.
+  There's not much reason why you'd want to change the color *mode* once you pick it.
+  The color themes (in contrast to the two color *modes*) can be applied at any time 
+  and as often as you want! Thus, feel free to use `:RbDark`, `:RbLight`, or `:RbHi` (etc) 
+  at any time and as often as you like... but be wary of ever running 
+  `:call RbCustomColors()` or `:call RbNamedColors()` outside of `rainbow.vim`.
   
-
-- The rainbow script/plugin currently seems to sometimes cause a rapid
-  screen-flickering when loading or reloading files it seems. I am currently
-  new to plugin design, so I suspect I have some kind of loading bug. I 
-  will try to fix this. I have a feeling some aspect of how I am managing
-  the loading (such as `autocmd` or just basic plugin loading) needs to be tweaked.
-  The bug doesn't seem to happen when Vim is run with `vim --noplugin filename.ext`.
-
 ## Miscellaneous Utilities
 
 The Git repo also includes very small shell scripts for more easily/quickly installing the rainbow script and/or synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (This make sit possible to keep the `rainbow.vim` source repo entirely separate from your Vim config folders to prevent junking them up.)
