@@ -518,10 +518,10 @@ command -nargs=0 RbOSquareSquiggle :call RbOnlySquareSquiggle()
 
 " Function for toggling rainbow highlighting of delimiters on and off easily:
 function! Rb()
-  if g:RbActive ==? 0
+  if g:RbActive ==# 0
     call RbOn()
     let g:RbActive = 1
-  elseif g:RbActive ==? 1
+  elseif g:RbActive ==# 1
     call RbOff()
     let g:RbActive = 0
   endif
@@ -536,9 +536,9 @@ command -nargs=0 RainbowToggle :call Rb()
 
 
 function! RbSync()
-  if g:RbActive ==? 0
+  if g:RbActive ==# 0
     call RbOff()
-  elseif g:RbActive ==? 1
+  elseif g:RbActive ==# 1
     call RbOn()
   endif
 endfunction
