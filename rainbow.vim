@@ -545,14 +545,38 @@ endfunction
 command -nargs=0 RbSync :call RbSync()
 " If the current rainbow highlighting state somehow doesn't 
 " match the underlying state then this will synchronize them.
-"
-" Desynchronization of the highlighting happens whenever an
-" unnamed buffer is saved to a named file. This fixes it:
 
-augroup RbFixGVim
+" One case where desynchronization of the highlighting happens is 
+" whenever an unnamed buffer is saved to a named file in GVim. This fixes it:
+augroup RbGVimFix
   autocmd!
   autocmd BufWritePost * call RbSync()
 augroup end
+
+" When Vim reloads a file that was modified outside of Vim (such as in a
+" different text editor) then Vim will lose the applied rainbow highlighting.
+" 
+" The following `autocmd` group fixes that:
+augroup RgFileReloadFix
+  autocmd!
+  autocmd FileChangedShellPost * call RbSync()
+augroup end
+" Thus, this fix makes working in parallel with both Vim and some other text
+" editor open more pleasant. This is especially useful when the other editor doesn't 
+" support rainbow highlighting itself but is very useful in other ways (e.g. DrRacket).
+" 
+" Using Vim with `rainbow.vim` active alongside whatever other editor(s) you
+" use provides a very useful 'nesting level visualizer', plus access to Vim's
+" editing commands! That way, you can easily get the best of both worlds!
+" 
+" Try it! Try working with both Vim and another editor side by side.
+" Vim will detect changes and perform file reloads when they happen.
+" 
+" Note: The file changes are detected only when the Vim window regains focus.
+" 
+" Also: DrRacket is slower than Vim at detecting file changes, but DrRacket 
+" can be forced to reload a file by pressing Ctrl Shift E. Thus, you can
+" work in both directions (editing in DrRacket and Vim) more expediently.
 
 
 
@@ -688,15 +712,17 @@ augroup end
 "
 " Racket, Steel Bank Common Lisp, and Janet all of have very good Windows support.
 " Other languages mentioned above may also, but I haven't tested them as much or at all.
-" 
+
 " Fennel is another interesting Lisp/Scheme family lanuage. It transpiles to
 " Lua and has full compatibility with it, which makes it possible to use
 " Fennel anywhere where Lua is used (and Lua is the most popular overall
-" embedding scripting language for applications in the software industry). This makes
-" Fennel a great option for 'using Lisp/Scheme anywhere'. Moreover, if the
-" resulting code is run on LuaJIT then the performance is very good, perhaps
-" just modestly worse than something like Java or C#, hence perhaps as performant as
-" SBCL or faster. It is another great choice, though less widely known.
+" embedded scripting language for applications in the software industry). 
+" This makes Fennel a great option for 'using Lisp/Scheme anywhere'. 
+" 
+" Moreover, if the resulting code is run on LuaJIT then the performance is very good, 
+" perhaps just modestly worse than something like Java or C#, hence perhaps as performant 
+" as SBCL or faster. It is another good option, though less widely known.
+" 
 " It is compatible with basically any Lua codebase (e.g. the Love game engine, etc).
 
 " See the following GitHub repo for a huge list of Lisp/Scheme languages and implementations:
