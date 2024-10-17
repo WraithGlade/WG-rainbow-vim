@@ -697,6 +697,7 @@ augroup end
 
 " Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist(!),
 " such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), Lcc, and Carp.
+" [Note: Even though Wax is inspired by Haxe, the correct spelling is 'Wax' -- not 'Waxe'.
 " 
 " These languages have smaller communities than Common Lisp and Racket and
 " some appear less updated: either inactive (incomplete) or stable/mature (complete).
