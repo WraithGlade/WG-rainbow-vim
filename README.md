@@ -12,11 +12,11 @@ The script was based/built upon John Gilmore's original "Rainbow Parenthesis" *[
 
 This rainbow highlighter (unlike some others) uses only Vim's built-in plugin system and therefore doesn't require a bunch of brittle or trendy (hence unreliable) 3rd party dependencies. It doesn't muck around with anything on your system. It is strictly **a simple one-file plain Vimscript-based plugin, using only Vim's provided built-in features without overengineering anything.**
 
-The core guiding principle of this script is to make it as easy to use as possible *without overengineering it* and *without requiring any third party dependencies*. Imperfect but reliable pragmatism is better than polluting the user's system or imposing needless tedium on them. Reliability and ease of use matter more than ideology!
+The core guiding principle of this script is to make it as easy to use as possible *without overengineering it* and *without requiring any third party dependencies*. Imperfect but reliable pragmatism is better than polluting the user's system or imposing needless tedium on them. Reliability and ease of use matter more than ideology.
 
 ## Script Usage
 
-I have included very extensive documentation throughout the entire Vimscript file and you can learn everything you need to know from reading the `rainbow.vim` file. That way, the necessary info is all self-contained, even if you lose this `README.md` document. It doesn't contain the exact same info as this `README.md`, but it is similar. Either way, the script is very easy to use and modify.
+I have included very extensive documentation throughout the entire Vimscript file as comments and you can learn everything you need to know from reading the `rainbow.vim` file. That way, the necessary info is all self-contained, even if you lose this `README.md` document. It doesn't contain the exact same info as this `README.md`, but it is similar. Either way, the script is very easy to use and modify.
 
 To use this script ("plugin"), all you have to do is place the script into your `%userprofile%/vimfiles/plugin` (on Windows) or `~/.vim/plugin` (on Linux/BSD/Unix) folder and it will load itself automatically whenever you use Vim. Running `Windows_install.bat` or `Linux_etc_install.sh` will try to do this automatically for you (like an installer).
 
@@ -29,7 +29,7 @@ A wide range of useful shorthand commands are included. The most useful are:
 - `:Rb` (or `:RbToggle` or `:Rainbow` or `:RainbowToggle`): disable/enable (flipping back and forth) the rainbow highlighting (without disabling other syntax highlighting)
 - `:RbOff`: disable all rainbow highlighting (without disabling other syntax highlighting)
 - `:RbOn`: enable all rainbow highlighting (without enabling other syntax highlighting)
-- `:RbDark` (or `RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`): applies a dark color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *light* foreground colors)
+- `:RbDark` (or `:RbDarkTheme` or `:RbDarkBg` or `:RbLightFg`): applies a dark color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *light* foreground colors)
 - `:RbLight` (or `:RbLightTheme` or `:RbLightBg` or `:RbDarkFg`): applies a light color theme to the rainbow highlighter (i.e. tells the rainbow highlighter to use *dark* foreground colors)
 - `:RbHi` (or `:RbHighContrast` or `:RbHiContrast` or `:RbHiCon` or `:RbHigh`): applies a high contrast color theme to the rainbow highlighter (one with huge gaps in color contrast between successive nested delimiter highlighting colors, but also tweaked for broader usability and more pleasing aesthetics than true max contrast would have)
 - `:RbWh` (or `:RbWhiteStrobe` or `:RbWhite`): applies light greyscale-only highlighting suitable for use on dark backgrounds
@@ -52,7 +52,7 @@ The following less commonly used commands are also included:
 
 **Type any of the above commands into Vim to use them anytime you want!**
 
-**All these commands are all designed to be reusable and you can call them as often as you want during a Vim session.**
+**All these commands are designed to be reusable and you can call them as often as you want during a Vim session.**
 
 The script is cleanly organized into named functions, extensively commented, and is very easy to read. Feel free to add functions and command shortcuts of your own to your copy!
 
@@ -80,7 +80,7 @@ If you use `:syntax off` at any point then the script may stop working and you m
   
 ## Miscellaneous Utilities
 
-The Git repo also includes very small shell scripts for more easily/quickly installing the rainbow script and/or synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (This make sit possible to keep the `rainbow.vim` source repo entirely separate from your Vim config folders to prevent junking them up.)
+The Git repo also includes very small shell scripts for more easily/quickly installing the rainbow script and/or synchronizing the Git repo's `rainbow.vim` with Vim's per-user config file directory contents. (This makes it possible to keep the `rainbow.vim` source repo entirely separate from your Vim config folders to prevent junking them up.)
 
 You don't need to concern yourself with that though if you intend to just drag and drop `rainbow.vim` to your Vim `plugin` folder. All these extra scripts do is perform the copying for you automatically:
 
@@ -100,10 +100,12 @@ These scripts together enable a faster workflow for managing changes to `rainbow
 
 Anything that aids the user's experience using software (no matter how slightly) is usually worth doing!
 
-**PS**: Alternatively, for cases where you want to disable the rainbow syntax script without uninstalling it, you can run Vim with `vim --noplugin` instead of just `vim` and it'll disable all auto-loading of all plugins (not just `rainbow.vim`) in Vim's `plugin` folder, so that you can have a clean Vim instance whenever you want or need one. `vim --noplugin` is also useful for comparing Vim's behavior without plugins against Vim's behavior with plugins, such as for debugging or testing or clarifying your understanding of the system. If a bug doesn't happen with `vim --noplugin` but *does* with just `vim` then one or more plugins is likely contributing to it.
+**PS**: Alternatively, for cases where you want to disable the rainbow syntax script *completely* (so that it never even loads) without uninstalling it, you can run Vim with `vim --noplugin` instead of just `vim` and it'll disable all auto-loading of all plugins (not just `rainbow.vim`) in Vim's `plugin` folder, so that you can have a clean Vim instance whenever you want or need one. `vim --noplugin` is also useful for comparing Vim's behavior without plugins against Vim's behavior with plugins, such as for debugging or testing or clarifying your understanding of the system. If a bug doesn't happen with `vim --noplugin` but *does* with just `vim` then one or more plugins is likely contributing to it. 
+
+Remember though that using `:RbOn`, `:RbOff`, `:RbToggle` (or any of the other provided shorthand commands) and/or modifying the "BASIC SETUP" section of the `rainbow.vim` file to change which provided functions it calls (e.g. such as setting it off by default) is usually the preferred way of managing this rainbow highlighter script's effects.
 
 ## Extras (Bonus)
 
-The `rainbow.vim` file's comments also contain a section giving recommendations on what Lisp/Scheme-like languages you may want to use or explore and what their most salient advantages and disadvantages are. 
+The `rainbow.vim` file's comments also contain a section giving recommendations on what Lisp/Scheme-like languages you may want to use or explore and what some of their most salient advantages and disadvantages may be. 
 
-Search `rainbow.vim` for the section titled "If you're having trouble deciding what language to use" if you want to read those recommendations and potentially broaden your awareness of some related s-expression based programming languages.
+Search `rainbow.vim` for the section titled "If you're having trouble deciding what language to use" if you want to read those language recommendations and potentially broaden your awareness of the diverse range of related s-expression based programming languages that are available.

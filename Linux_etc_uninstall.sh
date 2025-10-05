@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # This attempts to delete the rainbow scipt from Vim's
 # `plugin` directory, so that it is no longer applied to Vim.
 # 

@@ -11,7 +11,7 @@
 " any script or plugin that changes the colors of matching delimiters 
 " so that each level of delimiters is colored differently for clarity.
 " 
-" Such highlighting can be very useful for Lisp/Scheme family programming
+" Such highlighting can be very useful for Lisp/Scheme family (s-expression) programming
 " languages especially, but is also useful in many other contexts too, such
 " as unknown/obscure programming languages and even plain text (when nested).
 " 
@@ -93,10 +93,10 @@
 " Try switching back and forth between `:RbDark` (or `:RbLight`) and `:RbHi` to see what I mean.
 " 
 " You can also call any of this script's functions at runtime by writing just `:FuncName` 
-" during normal Vim use. There are also other shorthand versions and alt names available 
+" during normal Vim use. There are also other shorthand versions and alternative names available 
 " (search for `command -narg` declarations to see what shorthand commands are already included).
 " 
-" The `:Rb` command is especially useful, since it toggles the rainbow highlighter on and off.
+" The `:Rb` shorthand command is especially useful, since it toggles the rainbow highlighter on and off.
 " Many other highly useful commands were included as well though. Take a look! Make your own too!
 " 
 " You can also modify the individual color assignments within the color theme functions
@@ -172,7 +172,7 @@ endfunction
 " 
 " The higher the contrast between foreground and background and between successive
 " color hues, saturations, and lightnesses, the easier it'll be to distinguish deeply 
-" nested nearby delimiters' matching pairs, but the more your choices will be
+" nested nearby delimiters' matching pairs, but the more your color choices will be
 " forced to go a certain way. Thus, a good color theme is often a balancing act.
 
 
@@ -254,7 +254,7 @@ function! RbHighContrast()
   " Intended for high color component contrast for easier discernment.
   " The `ctermfg` variant uses *actual* maximum component contrast, but the `guifg`
   " version tweaks the colors for aesthetics and so that the theme works better on both
-  " dark and light backgrounds (though imperfectly, because of competing goals).
+  " dark and light backgrounds (though imperfectly, because of balancing competing goals).
   highlight level18c   ctermfg=Red         guifg=#ff0000
   highlight level17c   ctermfg=Green       guifg=#00bf00
   highlight level16c   ctermfg=Blue        guifg=#0080ff
@@ -557,7 +557,7 @@ augroup end
 " different text editor) then Vim will lose the applied rainbow highlighting.
 " 
 " The following `autocmd` group fixes that:
-augroup RgFileReloadFix
+augroup RbFileReloadFix
   autocmd!
   autocmd FileChangedShellPost * call RbSync()
 augroup end
@@ -572,11 +572,13 @@ augroup end
 " Try it! Try working with both Vim and another editor side by side.
 " Vim will detect changes and perform file reloads when they happen.
 " 
-" Note: The file changes are detected only when the Vim window regains focus.
+" Note: The file changes are detected only when the Vim window regains focus
+" (i.e. when you click on the Vim window again). Vim will ask if you want to reload.
 " 
 " Also: DrRacket is slower than Vim at detecting file changes, but DrRacket 
 " can be forced to reload a file by pressing Ctrl Shift E. Thus, you can
 " work in both directions (editing in DrRacket and Vim) more expediently.
+" Many other text editors support change detection and reloading too, but how differs.
 
 
 
@@ -584,14 +586,17 @@ augroup end
 "   BASIC SETUP
 " =====================================================================================
 
-" Below is where everything is actually put into effect.
+" Below is where everything is actually put into effect each time Vim opens.
 "
 " This is the default setup for the script essentially.
 " 
 " If desired, modify the colors inside `RbDarkTheme` and/or `RbLightTheme` (etc)
 " or alternatively create your own separate named color theme function(s).
 " 
-" Then, change which functions are called below to suit your preferences:
+" Afterwards, change which functions are called below to suit your preferences.
+" 
+" I recommend trying RbHighContrast, RbLightTheme, and RbDarkTheme and choosing one.
+" However, you can also easily change mid session via :RbHi, :RbLight, and :RbDark.
 
 call RbCustomColors()
 call RbHighContrast()
@@ -678,53 +683,62 @@ augroup end
 " If you're having trouble deciding what language to use:
 " -------------------------------------------------------
 
+" Common Lisp seems to typically be the most performant traditional Lisp/Scheme language.
+" One benchmark I looked at seemed to place CL's performance at ~3x to 6x slower than C (for SBCL).
+" It used proper optimization declarations though. It was not 100% idiomatic Common Lisp code.
+" 
+" Steel Bank Common Lisp (SBCL), Embeddable Common Lisp (ECL), and Clozure (CCL), may be the most useful CL implementations.
+
+" Racket has the nicest IDE, the easiest EXE generation and app redistribution, and one of the best macro debuggers.
+
+" Common Lisp and Racket probably have the largest libraries and largest communities.
+
+" Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist,
+" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), Lcc, and Carp.
+" (Note: Even though Wax is inspired by Haxe, the correct spelling is 'Wax' --- not 'Waxe'.)
+" 
+" These languages have much smaller communities than Common Lisp and Racket and some are 
+" much less active and/or much less mature. Do your research if planning a big project.
+" 
+" Such languages that target C directly may require more low-level coding, but may potentially outperform 
+" conventional Lisp/Scheme languages (including Common Lisp) conceivably and waste less CPU time, energy, and/or space.
+" 
+" Such languages may let you bind more closely to C and C's libraries, but you may also *need* to do so to get
+" anything useful done since they have much smaller ecosystems and communities, whereas traditional Lisps/Schemes have more built-in. 
+
+" Some of the Scheme family languages' claims to support Windows are dubious,
+" so heads up on that and make sure to actually test them for viability.
+" Racket has the most reliable cross-platform OS support of the Scheme family.
+
+" Fennel is another interesting Lisp/Scheme family lanuage. It transpiles to
+" Lua and has full compatibility with all of Lua, which makes it possible to use
+" Fennel anywhere where Lua is used (and Lua seems to be the most popular 
+" embedded scripting language overall in the software industry, so that's a lot). 
+" 
+" Moreover, if Lua code is run on LuaJIT then the performance is reasonably good, 
+" perhaps just moderately worse than something like Java or C#.
+" 
+" It is compatible with basically any Lua codebase (e.g. the Love2D game engine, etc).
+
 " Janet is a Lisp/Scheme family languages that cleans up and removes many
 " oddities and archaisms from Lisp/Scheme (e.g. it has no `car` or `cdr`).
 " However, it seems to be interpreted and intended for scripting/embedding and so
 " it may suffer from poor performance on par with e.g. Python or non-JIT Lua (etc).
+" Janet breaks with past traditions and ignores conventional Lisp-isms (idioms) more than most of the others.
 
-" Common Lisp seems to typically be the most performant *traditional* Lisp/Scheme language.
-" One benchmark I looked at seemed to place CL's performance at ~3x to 6x slower than C (for SBCL).
-" It used proper optimization declarations though. It was not 100% idiomatic Common Lisp code.
-" 
-" Steel Bank Common Lisp (SBCL) and Embeddable Common Lisp may be the most useful CL implementations.
+" Clojure has the benefit of targeting the Java Virtual Machine (JVM) 
+" and hence has access to all of Java's enormous ecosystem. It also has strong functional data structures.
 
-" Racket and/or Janet are perhaps the 'cleanest' Lisp/Scheme languages overall.
-" Racket has the nicest IDE, the easiest EXE generation, and one of the best macro debuggers.
-" Janet 'breaks with past traditions' to improve idioms of use more than any of the others.
+" Racket and/or Janet are perhaps the stylistically 'cleanest' Lisp/Scheme languages overall, arguably.
+" However, Steel Bank Common Lisp (SBCL) is the most performant and has the largest ecosystem overall
+" and Common Lisp in general is more permissive and pragmatic and more suited to C-like imperative code (e.g. `loop`),
+" whereas Scheme family languages (such as Racket) are more ideologically restrictive (e.g. fixated on recursion, 
+" hostile to imperative/C-like looping) overall. Pragmatists may prefer Common Lisp and find *it* actually feels cleaner.
 
-" Common Lisp and Racket probably have the largest libraries and largest communities.
-
-" Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist(!),
-" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), Lcc, and Carp.
-" [Note: Even though Wax is inspired by Haxe, the correct spelling is 'Wax' -- not 'Waxe'.
+" I think most users should probably pick Steel Bank Common Lisp, Racket, Clojure, Janet, or Fennel.
+" Even more narrowly, I would personally suggest either SBCL (for performance) or Racket (for purity and aesthetics).
 " 
-" These languages have smaller communities than Common Lisp and Racket and
-" some appear less updated: either inactive (incomplete) or stable/mature (complete).
-" 
-" Such languages may require more low-level coding, but would likely easily greatly outperform 
-" conventional Lisp/Scheme languages (including Common Lisp) and waste much less CPU time/energy.
-" 
-" You'll get access to closer binding to C and C's libraries, but may also *need* to do so.
-" You'll produce far more computationally efficient programs that way though (~on par with C).
-
-" Like many Lisp/Scheme family languages though, some of these languages don't have good
-" cross-platform support for Windows, though nearly all support Linux/BSD/Unix well.
-"
-" Racket, Steel Bank Common Lisp, and Janet all of have very good Windows support.
-" Other languages mentioned above may also, but I haven't tested them as much or at all.
-
-" Fennel is another interesting Lisp/Scheme family lanuage. It transpiles to
-" Lua and has full compatibility with it, which makes it possible to use
-" Fennel anywhere where Lua is used (and Lua is the most popular overall
-" embedded scripting language for applications in the software industry). 
-" This makes Fennel a great option for 'using Lisp/Scheme anywhere'. 
-" 
-" Moreover, if the resulting code is run on LuaJIT then the performance is very good, 
-" perhaps just modestly worse than something like Java or C#, hence perhaps as performant 
-" as SBCL or faster. It is another good option, though less widely known.
-" 
-" It is compatible with basically any Lua codebase (e.g. the Love game engine, etc).
+" The smaller languages that target C directly (e.g. CakeLisp, Wax, Carp) are promising for the future though.
 
 " See the following GitHub repo for a huge list of Lisp/Scheme languages and implementations:
 " 
@@ -738,9 +752,9 @@ augroup end
 " `<sfile>` is the current script file (`rainbow.vim` in this case).
 " 
 " `source <path/to/file.vim>` loads and applies whatever `.vim` script is passed to it.
-" `so` can be used as shorthand instead if desired.
+" `so` can be used as shorthand for `source` instead if desired.
 "
-" See https://vimdoc.sourceforge.net/htmldoc/autocmd.html
+" Also, see https://vimdoc.sourceforge.net/htmldoc/autocmd.html
 " 
 " When I tried to put the above `autocmd` lines into separate
 " function(s), it caused loading errors whenever I loaded
