@@ -733,12 +733,12 @@ augroup end
 " However, Steel Bank Common Lisp (SBCL) is the most performant and has the largest ecosystem overall
 " and Common Lisp in general is more permissive and pragmatic and more suited to C-like imperative code (e.g. `loop`),
 " whereas Scheme family languages (such as Racket) are more ideologically restrictive (e.g. fixated on recursion, 
-" hostile to imperative/C-like looping) overall. Pragmatists may prefer Common Lisp and find *it* actually feels cleaner.
+" dismissive of imperative/C-like looping) overall. Thus, some may prefer Common Lisp and *it* may feel cleaner to them.
 
 " I think most users should probably pick Steel Bank Common Lisp, Racket, Clojure, Janet, or Fennel.
 " Even more narrowly, I would personally suggest either SBCL (for performance) or Racket (for purity and aesthetics).
 " 
-" The smaller languages that target C directly (e.g. CakeLisp, Wax, Carp) are promising for the future though.
+" The smaller languages that target C directly (e.g. CakeLisp, Wax, Carp, Dale) are promising for the future though.
 
 " See the following GitHub repo for a huge list of Lisp/Scheme languages and implementations:
 " 
