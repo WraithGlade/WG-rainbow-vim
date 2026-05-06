@@ -670,14 +670,23 @@ autocmd BufNewFile,BufRead,GUIEnter * source <sfile>
 
 " For Janet:
 " ----------
-"autocmd BufNewFile,BufRead,GUIEnter *.janet so <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.janet source <sfile>
 
 " For Fennel:
 " ----------
-"autocmd BufNewFile,BufRead,GUIEnter *.fnl so <sfile>
+"autocmd BufNewFile,BufRead,GUIEnter *.fnl source <sfile>
 
 augroup end
 
+
+augroup RbCMakeFix
+autocmd!
+
+autocmd VimEnter CMakeLists.txt :call RbOff()
+autocmd VimEnter *.cmake :call RbOff()
+
+augroup end
+" For some strange reason, rainbow.vim interferes with CMake file syntax.
 
 
 " If you're having trouble deciding what language to use:
@@ -694,7 +703,7 @@ augroup end
 " Common Lisp and Racket probably have the largest libraries and largest communities.
 
 " Some languages that transpile Lisp/Scheme-like code to *low-level* C also exist,
-" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), Cicili (Lcc), and Carp.
+" such as Dale, CakeLisp, Wax, C-Mera, LISP/c (Lispsy), Lcc, and Carp.
 " (Note: Even though Wax is inspired by Haxe, the correct spelling is 'Wax' --- not 'Waxe'.)
 " 
 " These languages have much smaller communities than Common Lisp and Racket and some are 
@@ -738,7 +747,7 @@ augroup end
 " I think most users should probably pick Steel Bank Common Lisp, Racket, Clojure, Janet, or Fennel.
 " Even more narrowly, I would personally suggest either SBCL (for performance) or Racket (for purity and aesthetics).
 " 
-" The smaller languages that target C directly (e.g. CakeLisp, Wax, Carp, Dale, etc) are promising for the future though.
+" The smaller languages that target C directly (e.g. CakeLisp, Wax, Carp, Dale) are promising for the future though.
 
 " See the following GitHub repo for a huge list of Lisp/Scheme languages and implementations:
 " 
