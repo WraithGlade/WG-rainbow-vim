@@ -581,6 +581,18 @@ augroup end
 " Many other text editors support change detection and reloading too, but how differs.
 
 
+"augroup RbFileExplorerFix
+"  autocmd!
+"  autocmd FileReadPost * call RbSync()
+"augroup end
+"
+" TODO BUGFIX: When using Vim in file explorer/browser mode (such as via `vim .`)
+" the rainbow plugin's syntax isn't applied immediately and must be 
+" retoggled via `:RbSync` (or similar). I haven't found an autocmd event
+" that matches it though, so I'm not sure how to fix it. I've tried many
+" Vim events in the above `autocmd` group fix attempt, to no avail.
+
+
 
 " =====================================================================================
 "   BASIC SETUP
@@ -682,11 +694,12 @@ augroup end
 augroup RbCMakeFix
 autocmd!
 
-autocmd VimEnter,FileChangedShellPost CMakeLists.txt :call RbOff()
-autocmd VimEnter,FileChangedShellPost *.cmake :call RbOff()
+autocmd VimEnter,FileChangedShellPost CMakeLists.txt call RbOff()
+autocmd VimEnter,FileChangedShellPost *.cmake call RbOff()
 
 augroup end
 " For some strange reason, rainbow.vim interferes with CMake file syntax.
+" The above `augroup` fixes that by turning rainbow off just for CMake files.
 
 
 
