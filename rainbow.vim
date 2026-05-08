@@ -682,11 +682,12 @@ augroup end
 augroup RbCMakeFix
 autocmd!
 
-autocmd VimEnter CMakeLists.txt :call RbOff()
-autocmd VimEnter *.cmake :call RbOff()
+autocmd VimEnter,FileChangedShellPost CMakeLists.txt :call RbOff()
+autocmd VimEnter,FileChangedShellPost *.cmake :call RbOff()
 
 augroup end
 " For some strange reason, rainbow.vim interferes with CMake file syntax.
+
 
 
 " If you're having trouble deciding what language to use:
